@@ -1,0 +1,6 @@
+fare_id,price,currency_type,payment_method,transfers
+15,15,MZN,0,0
+18,18,MZN,0,0
+21,21,MZN,0,0
+27,27,MZN,0,0
+31,31,MZN,0,0

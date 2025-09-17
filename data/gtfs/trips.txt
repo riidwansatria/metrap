@@ -1,0 +1,427 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,block_id,trip_short_name,shape_id
+1,Weekday/Weekend,3　Weekday/Weekend_0520_trip10001001,Terminal de Chamissava,0,,,10001
+1,Weekday/Weekend,3　Weekday/Weekend_0840_trip10001001,Terminal de Chamissava,0,,,10001
+1,Weekday/Weekend,3　Weekday/Weekend_1200_trip10001001,Terminal de Chamissava,0,,,10001
+1,Weekday/Weekend,3　Weekday/Weekend_1520_trip10001001,Terminal de Chamissava,0,,,10001
+1,Weekday/Weekend,3　Weekday/Weekend_1840_trip10001001,Terminal de Chamissava,0,,,10001
+1,Weekday/Weekend,3　Weekday/Weekend_2200_trip10001001,Terminal de Chamissava,0,,,10001
+1B,Weekday/Weekend,3　Weekday/Weekend_0650_trip10002001,Anjo Voador (601),1,,,10002
+1B,Weekday/Weekend,3　Weekday/Weekend_1010_trip10002001,Anjo Voador (601),1,,,10002
+1B,Weekday/Weekend,3　Weekday/Weekend_1330_trip10002001,Anjo Voador (601),1,,,10002
+1B,Weekday/Weekend,3　Weekday/Weekend_1650_trip10002001,Anjo Voador (601),1,,,10002
+1B,Weekday/Weekend,3　Weekday/Weekend_2010_trip10002001,Anjo Voador (601),1,,,10002
+1B,Weekday/Weekend,3　Weekday/Weekend_2330_trip10002001,Anjo Voador (601),1,,,10002
+1C,Weekday/Weekend,3　Weekday/Weekend_0520_trip10401001,Zona 5,0,,,10401
+1C,Weekday/Weekend,3　Weekday/Weekend_0840_trip10401001,Zona 5,0,,,10401
+1C,Weekday/Weekend,3　Weekday/Weekend_1200_trip10401001,Zona 5,0,,,10401
+1C,Weekday/Weekend,3　Weekday/Weekend_1520_trip10401001,Zona 5,0,,,10401
+1C,Weekday/Weekend,3　Weekday/Weekend_1840_trip10401001,Zona 5,0,,,10401
+1C,Weekday/Weekend,3　Weekday/Weekend_2200_trip10401001,Zona 5,0,,,10401
+1D,Weekday/Weekend,3　Weekday/Weekend_0700_trip10402001,Anjo Voador (601),1,,,10402
+1D,Weekday/Weekend,3　Weekday/Weekend_1020_trip10402001,Anjo Voador (601),1,,,10402
+1D,Weekday/Weekend,3　Weekday/Weekend_1340_trip10402001,Anjo Voador (601),1,,,10402
+1D,Weekday/Weekend,3　Weekday/Weekend_1700_trip10402001,Anjo Voador (601),1,,,10402
+1D,Weekday/Weekend,3　Weekday/Weekend_2020_trip10402001,Anjo Voador (601),1,,,10402
+1D,Weekday/Weekend,3　Weekday/Weekend_2340_trip10402001,Anjo Voador (601),1,,,10402
+1E,Weekday/Weekend,3　Weekday/Weekend_1500_trip10501001,Ponta d'Ouro (607),0,,,10501
+1F,Weekday/Weekend,3　Weekday/Weekend_0400_trip10502001,Anjo Voador (601),1,,,10502
+1H,Weekday/Weekend,3　Weekday/Weekend_1300_trip10601001,Ponta d'Ouro (607),0,,,10601
+1G,Weekday/Weekend,3　Weekday/Weekend_1700_trip10602001,Anjo Voador (601),1,,,10602
+11,Weekday/Weekend,3　Weekday/Weekend_0420_trip11001001,Novo Cemitério (504),0,,,11001
+11,Weekday/Weekend,3　Weekday/Weekend_0705_trip11001001,Novo Cemitério (504),0,,,11001
+11,Weekday/Weekend,3　Weekday/Weekend_0950_trip11001001,Novo Cemitério (504),0,,,11001
+11,Weekday/Weekend,3　Weekday/Weekend_1235_trip11001001,Novo Cemitério (504),0,,,11001
+11,Weekday/Weekend,3　Weekday/Weekend_1520_trip11001001,Novo Cemitério (504),0,,,11001
+11,Weekday/Weekend,3　Weekday/Weekend_1800_trip11001001,Novo Cemitério (504),0,,,11001
+11B,Weekday/Weekend,3　Weekday/Weekend_0540_trip11002001,Albert Lithule,1,,,11002
+11B,Weekday/Weekend,3　Weekday/Weekend_0825_trip11002001,Albert Lithule,1,,,11002
+11B,Weekday/Weekend,3　Weekday/Weekend_1110_trip11002001,Albert Lithule,1,,,11002
+11B,Weekday/Weekend,3　Weekday/Weekend_1355_trip11002001,Albert Lithule,1,,,11002
+11B,Weekday/Weekend,3　Weekday/Weekend_1640_trip11002001,Albert Lithule,1,,,11002
+11B,Weekday/Weekend,3　Weekday/Weekend_1920_trip11002001,Albert Lithule,1,,,11002
+11C,Weekday/Weekend,3　Weekday/Weekend_0500_trip11101001,Novo Cemitério (504),0,,,11001
+11C,Weekday/Weekend,3　Weekday/Weekend_0750_trip11101001,Novo Cemitério (504),0,,,11001
+11C,Weekday/Weekend,3　Weekday/Weekend_1040_trip11101001,Novo Cemitério (504),0,,,11001
+11C,Weekday/Weekend,3　Weekday/Weekend_1330_trip11101001,Novo Cemitério (504),0,,,11001
+11C,Weekday/Weekend,3　Weekday/Weekend_1620_trip11101001,Novo Cemitério (504),0,,,11001
+11C,Weekday/Weekend,3　Weekday/Weekend_1900_trip11101001,Novo Cemitério (504),0,,,11001
+11D,Weekday/Weekend,3　Weekday/Weekend_0625_trip11102001,Albert Lithule,1,,,11002
+11D,Weekday/Weekend,3　Weekday/Weekend_0915_trip11102001,Albert Lithule,1,,,11002
+11D,Weekday/Weekend,3　Weekday/Weekend_1205_trip11102001,Albert Lithule,1,,,11002
+11D,Weekday/Weekend,3　Weekday/Weekend_1455_trip11102001,Albert Lithule,1,,,11002
+11D,Weekday/Weekend,3　Weekday/Weekend_1745_trip11102001,Albert Lithule,1,,,11002
+11D,Weekday/Weekend,3　Weekday/Weekend_2025_trip11102001,Albert Lithule,1,,,11002
+16B,Weekday/Weekend,3　Weekday/Weekend_1700_trip16201001,Mercado Balucuane - Terminal,0,,,16201
+16,Weekday/Weekend,3　Weekday/Weekend_0430_trip16202001,P. Trabalhadores (213),1,,,16202
+17,Weekday/Weekend,3　Weekday/Weekend_0520_trip17001001,Zimpeto (X25),0,,,17001
+17,Weekday/Weekend,3　Weekday/Weekend_0830_trip17001001,Zimpeto (X25),0,,,17001
+17,Weekday/Weekend,3　Weekday/Weekend_1140_trip17001001,Zimpeto (X25),0,,,17001
+17,Weekday/Weekend,3　Weekday/Weekend_1450_trip17001001,Zimpeto (X25),0,,,17001
+17,Weekday/Weekend,3　Weekday/Weekend_1755_trip17001001,Zimpeto (X25),0,,,17001
+17,Weekday/Weekend,3　Weekday/Weekend_2100_trip17001001,Zimpeto (X25),0,,,17001
+17B,Weekday/Weekend,3　Weekday/Weekend_0655_trip17002001,P. Trabalhadores (213),1,,,17002
+17B,Weekday/Weekend,3　Weekday/Weekend_1005_trip17002001,P. Trabalhadores (213),1,,,17002
+17B,Weekday/Weekend,3　Weekday/Weekend_1315_trip17002001,P. Trabalhadores (213),1,,,17002
+17B,Weekday/Weekend,3　Weekday/Weekend_1625_trip17002001,P. Trabalhadores (213),1,,,17002
+17B,Weekday/Weekend,3　Weekday/Weekend_1930_trip17002001,P. Trabalhadores (213),1,,,17002
+17B,Weekday/Weekend,3　Weekday/Weekend_2235_trip17002001,P. Trabalhadores (213),1,,,17002
+17C,Weekday/Weekend,3　Weekday/Weekend_0530_trip17101001,Zimpeto (X25),0,,,17001
+17C,Weekday/Weekend,3　Weekday/Weekend_0840_trip17101001,Zimpeto (X25),0,,,17001
+17C,Weekday/Weekend,3　Weekday/Weekend_1150_trip17101001,Zimpeto (X25),0,,,17001
+17C,Weekday/Weekend,3　Weekday/Weekend_1510_trip17101001,Zimpeto (X25),0,,,17001
+17C,Weekday/Weekend,3　Weekday/Weekend_1820_trip17101001,Zimpeto (X25),0,,,17001
+17C,Weekday/Weekend,3　Weekday/Weekend_2130_trip17101001,Zimpeto (X25),0,,,17001
+17D,Weekday/Weekend,3　Weekday/Weekend_0705_trip17102001,P. Trabalhadores (213),1,,,17002
+17D,Weekday/Weekend,3　Weekday/Weekend_1015_trip17102001,P. Trabalhadores (213),1,,,17002
+17D,Weekday/Weekend,3　Weekday/Weekend_1325_trip17102001,P. Trabalhadores (213),1,,,17002
+17D,Weekday/Weekend,3　Weekday/Weekend_1645_trip17102001,P. Trabalhadores (213),1,,,17002
+17D,Weekday/Weekend,3　Weekday/Weekend_1955_trip17102001,P. Trabalhadores (213),1,,,17002
+17D,Weekday/Weekend,3　Weekday/Weekend_2305_trip17102001,P. Trabalhadores (213),1,,,17002
+20,Weekday/Weekend,3　Weekday/Weekend_0510_trip20001001,Grande Maputo (X24),0,,,20001
+20,Weekday/Weekend,3　Weekday/Weekend_0800_trip20001001,Grande Maputo (X24),0,,,20001
+20,Weekday/Weekend,3　Weekday/Weekend_1050_trip20001001,Grande Maputo (X24),0,,,20001
+20,Weekday/Weekend,3　Weekday/Weekend_1350_trip20001001,Grande Maputo (X24),0,,,20001
+20,Weekday/Weekend,3　Weekday/Weekend_1640_trip20001001,Grande Maputo (X24),0,,,20001
+20,Weekday/Weekend,3　Weekday/Weekend_1930_trip20001001,Grande Maputo (X24),0,,,20001
+20B,Weekday/Weekend,3　Weekday/Weekend_0635_trip20002001,Albert Lithule,1,,,20002
+20B,Weekday/Weekend,3　Weekday/Weekend_0925_trip20002001,Albert Lithule,1,,,20002
+20B,Weekday/Weekend,3　Weekday/Weekend_1215_trip20002001,Albert Lithule,1,,,20002
+20B,Weekday/Weekend,3　Weekday/Weekend_1515_trip20002001,Albert Lithule,1,,,20002
+20B,Weekday/Weekend,3　Weekday/Weekend_1805_trip20002001,Albert Lithule,1,,,20002
+20B,Weekday/Weekend,3　Weekday/Weekend_2055_trip20002001,Albert Lithule,1,,,20002
+21B,Weekday/Weekend,3　Weekday/Weekend_0520_trip21001001,Albazine (401),0,,,21001
+21B,Weekday/Weekend,3　Weekday/Weekend_0800_trip21001001,Albazine (401),0,,,21001
+21B,Weekday/Weekend,3　Weekday/Weekend_1040_trip21001001,Albazine (401),0,,,21001
+21B,Weekday/Weekend,3　Weekday/Weekend_1440_trip21001001,Albazine (401),0,,,21001
+21B,Weekday/Weekend,3　Weekday/Weekend_1720_trip21001001,Albazine (401),0,,,21001
+21B,Weekday/Weekend,3　Weekday/Weekend_2000_trip21001001,Albazine (401),0,,,21001
+21,Weekday/Weekend,3　Weekday/Weekend_0639_trip21002001,Museu (222),1,,,21002
+21,Weekday/Weekend,3　Weekday/Weekend_0919_trip21002001,Museu (222),1,,,21002
+21,Weekday/Weekend,3　Weekday/Weekend_1159_trip21002001,Museu (222),1,,,21002
+21,Weekday/Weekend,3　Weekday/Weekend_1559_trip21002001,Museu (222),1,,,21002
+21,Weekday/Weekend,3　Weekday/Weekend_1839_trip21002001,Museu (222),1,,,21002
+21,Weekday/Weekend,3　Weekday/Weekend_2119_trip21002001,Museu (222),1,,,21002
+37,Weekday/Weekend,3　Weekday/Weekend_0445_trip37001001,Zimpeto (X25),0,,,37001
+37,Weekday/Weekend,3　Weekday/Weekend_0750_trip37001001,Zimpeto (X25),0,,,37001
+37,Weekday/Weekend,3　Weekday/Weekend_1055_trip37001001,Zimpeto (X25),0,,,37001
+37,Weekday/Weekend,3　Weekday/Weekend_1400_trip37001001,Zimpeto (X25),0,,,37001
+37,Weekday/Weekend,3　Weekday/Weekend_1700_trip37001001,Zimpeto (X25),0,,,37001
+37,Weekday/Weekend,3　Weekday/Weekend_2000_trip37001001,Zimpeto (X25),0,,,37001
+37B,Weekday/Weekend,3　Weekday/Weekend_0615_trip37002001,Museu (210),1,,,37002
+37B,Weekday/Weekend,3　Weekday/Weekend_0920_trip37002001,Museu (210),1,,,37002
+37B,Weekday/Weekend,3　Weekday/Weekend_1225_trip37002001,Museu (210),1,,,37002
+37B,Weekday/Weekend,3　Weekday/Weekend_1530_trip37002001,Museu (210),1,,,37002
+37B,Weekday/Weekend,3　Weekday/Weekend_1830_trip37002001,Museu (210),1,,,37002
+37B,Weekday/Weekend,3　Weekday/Weekend_2130_trip37002001,Museu (210),1,,,37002
+37C,Weekday/Weekend,3　Weekday/Weekend_0515_trip37101001,Zimpeto (X25),0,,,37001
+37C,Weekday/Weekend,3　Weekday/Weekend_0825_trip37101001,Zimpeto (X25),0,,,37001
+37C,Weekday/Weekend,3　Weekday/Weekend_1135_trip37101001,Zimpeto (X25),0,,,37001
+37C,Weekday/Weekend,3　Weekday/Weekend_1445_trip37101001,Zimpeto (X25),0,,,37001
+37C,Weekday/Weekend,3　Weekday/Weekend_1755_trip37101001,Zimpeto (X25),0,,,37001
+37C,Weekday/Weekend,3　Weekday/Weekend_2100_trip37101001,Zimpeto (X25),0,,,37001
+37D,Weekday/Weekend,3　Weekday/Weekend_0650_trip37102001,Museu (210),1,,,37002
+37D,Weekday/Weekend,3　Weekday/Weekend_1000_trip37102001,Museu (210),1,,,37002
+37D,Weekday/Weekend,3　Weekday/Weekend_1310_trip37102001,Museu (210),1,,,37002
+37D,Weekday/Weekend,3　Weekday/Weekend_1620_trip37102001,Museu (210),1,,,37002
+37D,Weekday/Weekend,3　Weekday/Weekend_1930_trip37102001,Museu (210),1,,,37002
+37D,Weekday/Weekend,3　Weekday/Weekend_2235_trip37102001,Museu (210),1,,,37002
+37F,Weekday/Weekend,3　Weekday/Weekend_0600_trip37201001,Zimpeto (X25),0,,,37001
+37F,Weekday/Weekend,3　Weekday/Weekend_0910_trip37201001,Zimpeto (X25),0,,,37001
+37F,Weekday/Weekend,3　Weekday/Weekend_1220_trip37201001,Zimpeto (X25),0,,,37001
+37F,Weekday/Weekend,3　Weekday/Weekend_1530_trip37201001,Zimpeto (X25),0,,,37001
+37F,Weekday/Weekend,3　Weekday/Weekend_1840_trip37201001,Zimpeto (X25),0,,,37001
+37F,Weekday/Weekend,3　Weekday/Weekend_2150_trip37201001,Zimpeto (X25),0,,,37001
+37E,Weekday/Weekend,3　Weekday/Weekend_0735_trip37202001,Museu (210),1,,,37002
+37E,Weekday/Weekend,3　Weekday/Weekend_1045_trip37202001,Museu (210),1,,,37002
+37E,Weekday/Weekend,3　Weekday/Weekend_1355_trip37202001,Museu (210),1,,,37002
+37E,Weekday/Weekend,3　Weekday/Weekend_1705_trip37202001,Museu (210),1,,,37002
+37E,Weekday/Weekend,3　Weekday/Weekend_2015_trip37202001,Museu (210),1,,,37002
+37E,Weekday/Weekend,3　Weekday/Weekend_2325_trip37202001,Museu (210),1,,,37002
+39,Weekday/Weekend,3　Weekday/Weekend_0500_trip39001001,Zimpeto (X25),0,,,39001
+39,Weekday/Weekend,3　Weekday/Weekend_0730_trip39001001,Zimpeto (X25),0,,,39001
+39,Weekday/Weekend,3　Weekday/Weekend_1005_trip39001001,Zimpeto (X25),0,,,39001
+39,Weekday/Weekend,3　Weekday/Weekend_1245_trip39001001,Zimpeto (X25),0,,,39001
+39,Weekday/Weekend,3　Weekday/Weekend_1500_trip39001001,Zimpeto (X25),0,,,39001
+39,Weekday/Weekend,3　Weekday/Weekend_1520_trip39001001,Zimpeto (X25),0,,,39001
+39,Weekday/Weekend,3　Weekday/Weekend_1800_trip39001001,Zimpeto (X25),0,,,39001
+39B,Weekday/Weekend,3　Weekday/Weekend_0616_trip39002001,Albert Lithule,1,,,39002
+39B,Weekday/Weekend,3　Weekday/Weekend_0846_trip39002001,Albert Lithule,1,,,39002
+39B,Weekday/Weekend,3　Weekday/Weekend_1121_trip39002001,Albert Lithule,1,,,39002
+39B,Weekday/Weekend,3　Weekday/Weekend_1406_trip39002001,Albert Lithule,1,,,39002
+39B,Weekday/Weekend,3　Weekday/Weekend_1641_trip39002001,Albert Lithule,1,,,39002
+39B,Weekday/Weekend,3　Weekday/Weekend_1916_trip39002001,Albert Lithule,1,,,39002
+39C,Weekday/Weekend,3　Weekday/Weekend_0530_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_0830_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_0850_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_1130_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_1430_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_1730_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_1805_trip39101001,Zimpeto (X25),0,,,39001
+39C,Weekday/Weekend,3　Weekday/Weekend_2030_trip39101001,Zimpeto (X25),0,,,39001
+39D,Weekday/Weekend,3　Weekday/Weekend_0702_trip39102001,Albert Lithule,1,,,39002
+39D,Weekday/Weekend,3　Weekday/Weekend_1002_trip39102001,Albert Lithule,1,,,39002
+39D,Weekday/Weekend,3　Weekday/Weekend_1302_trip39102001,Albert Lithule,1,,,39002
+39D,Weekday/Weekend,3　Weekday/Weekend_1602_trip39102001,Albert Lithule,1,,,39002
+39D,Weekday/Weekend,3　Weekday/Weekend_1902_trip39102001,Albert Lithule,1,,,39002
+39D,Weekday/Weekend,3　Weekday/Weekend_2202_trip39102001,Albert Lithule,1,,,39002
+39E,Weekday/Weekend,3　Weekday/Weekend_0545_trip39201001,Zimpeto (X25),0,,,39001
+39E,Weekday/Weekend,3　Weekday/Weekend_1155_trip39201001,Zimpeto (X25),0,,,39001
+39E,Weekday/Weekend,3　Weekday/Weekend_2110_trip39201001,Zimpeto (X25),0,,,39001
+39F,Weekday/Weekend,3　Weekday/Weekend_0717_trip39202001,Albert Lithule,1,,,39002
+39F,Weekday/Weekend,3　Weekday/Weekend_1022_trip39202001,Albert Lithule,1,,,39002
+39F,Weekday/Weekend,3　Weekday/Weekend_1327_trip39202001,Albert Lithule,1,,,39002
+39F,Weekday/Weekend,3　Weekday/Weekend_1632_trip39202001,Albert Lithule,1,,,39002
+39F,Weekday/Weekend,3　Weekday/Weekend_1937_trip39202001,Albert Lithule,1,,,39002
+39F,Weekday/Weekend,3　Weekday/Weekend_2242_trip39202001,Albert Lithule,1,,,39002
+47,Weekday/Weekend,3　Weekday/Weekend_0430_trip47001001,Tchumene (107),0,,,47001
+47,Weekday/Weekend,3　Weekday/Weekend_0700_trip47001001,Tchumene (107),0,,,47001
+47,Weekday/Weekend,3　Weekday/Weekend_0930_trip47001001,Tchumene (107),0,,,47001
+47,Weekday/Weekend,3　Weekday/Weekend_1200_trip47001001,Tchumene (107),0,,,47001
+47,Weekday/Weekend,3　Weekday/Weekend_1430_trip47001001,Tchumene (107),0,,,47001
+47,Weekday/Weekend,3　Weekday/Weekend_1700_trip47001001,Tchumene (107),0,,,47001
+47B,Weekday/Weekend,3　Weekday/Weekend_0545_trip47002001,Albert Lithule,1,,,47002
+47B,Weekday/Weekend,3　Weekday/Weekend_0815_trip47002001,Albert Lithule,1,,,47002
+47B,Weekday/Weekend,3　Weekday/Weekend_1045_trip47002001,Albert Lithule,1,,,47002
+47B,Weekday/Weekend,3　Weekday/Weekend_1315_trip47002001,Albert Lithule,1,,,47002
+47B,Weekday/Weekend,3　Weekday/Weekend_1545_trip47002001,Albert Lithule,1,,,47002
+47B,Weekday/Weekend,3　Weekday/Weekend_1815_trip47002001,Albert Lithule,1,,,47002
+47C,Weekday/Weekend,3　Weekday/Weekend_0445_trip47101001,Tchumene (107),0,,,47001
+47C,Weekday/Weekend,3　Weekday/Weekend_0715_trip47101001,Tchumene (107),0,,,47001
+47C,Weekday/Weekend,3　Weekday/Weekend_0945_trip47101001,Tchumene (107),0,,,47001
+47C,Weekday/Weekend,3　Weekday/Weekend_1215_trip47101001,Tchumene (107),0,,,47001
+47C,Weekday/Weekend,3　Weekday/Weekend_1445_trip47101001,Tchumene (107),0,,,47001
+47C,Weekday/Weekend,3　Weekday/Weekend_1715_trip47101001,Tchumene (107),0,,,47001
+47D,Weekday/Weekend,3　Weekday/Weekend_0600_trip47102001,Albert Lithule,1,,,47002
+47D,Weekday/Weekend,3　Weekday/Weekend_0830_trip47102001,Albert Lithule,1,,,47002
+47D,Weekday/Weekend,3　Weekday/Weekend_1100_trip47102001,Albert Lithule,1,,,47002
+47D,Weekday/Weekend,3　Weekday/Weekend_1330_trip47102001,Albert Lithule,1,,,47002
+47D,Weekday/Weekend,3　Weekday/Weekend_1600_trip47102001,Albert Lithule,1,,,47002
+47D,Weekday/Weekend,3　Weekday/Weekend_1830_trip47102001,Albert Lithule,1,,,47002
+47E,Weekday/Weekend,3　Weekday/Weekend_0500_trip47201001,Tchumene (107),0,,,47001
+47E,Weekday/Weekend,3　Weekday/Weekend_0750_trip47201001,Tchumene (107),0,,,47001
+47E,Weekday/Weekend,3　Weekday/Weekend_1040_trip47201001,Tchumene (107),0,,,47001
+47E,Weekday/Weekend,3　Weekday/Weekend_1330_trip47201001,Tchumene (107),0,,,47001
+47E,Weekday/Weekend,3　Weekday/Weekend_1620_trip47201001,Tchumene (107),0,,,47001
+47E,Weekday/Weekend,3　Weekday/Weekend_1900_trip47201001,Tchumene (107),0,,,47001
+47F,Weekday/Weekend,3　Weekday/Weekend_0625_trip47202001,Albert Lithule,1,,,47002
+47F,Weekday/Weekend,3　Weekday/Weekend_0915_trip47202001,Albert Lithule,1,,,47002
+47F,Weekday/Weekend,3　Weekday/Weekend_1205_trip47202001,Albert Lithule,1,,,47002
+47F,Weekday/Weekend,3　Weekday/Weekend_1455_trip47202001,Albert Lithule,1,,,47002
+47F,Weekday/Weekend,3　Weekday/Weekend_1745_trip47202001,Albert Lithule,1,,,47002
+47F,Weekday/Weekend,3　Weekday/Weekend_2025_trip47202001,Albert Lithule,1,,,47002
+5B,Weekday/Weekend,3　Weekday/Weekend_0435_trip50001001,Mozal (102),0,,,50001
+5B,Weekday/Weekend,3　Weekday/Weekend_0715_trip50001001,Mozal (102),0,,,50001
+5B,Weekday/Weekend,3　Weekday/Weekend_0955_trip50001001,Mozal (102),0,,,50001
+5B,Weekday/Weekend,3　Weekday/Weekend_1235_trip50001001,Mozal (102),0,,,50001
+5B,Weekday/Weekend,3　Weekday/Weekend_1515_trip50001001,Mozal (102),0,,,50001
+5B,Weekday/Weekend,3　Weekday/Weekend_1800_trip50001001,Mozal (102),0,,,50001
+5,Weekday/Weekend,3　Weekday/Weekend_0555_trip50002001,Zedequias Manganhela,1,,,50002
+5,Weekday/Weekend,3　Weekday/Weekend_0835_trip50002001,Zedequias Manganhela,1,,,50002
+5,Weekday/Weekend,3　Weekday/Weekend_1115_trip50002001,Zedequias Manganhela,1,,,50002
+5,Weekday/Weekend,3　Weekday/Weekend_1355_trip50002001,Zedequias Manganhela,1,,,50002
+5,Weekday/Weekend,3　Weekday/Weekend_1635_trip50002001,Zedequias Manganhela,1,,,50002
+5,Weekday/Weekend,3　Weekday/Weekend_1920_trip50002001,Zedequias Manganhela,1,,,50002
+5D,Weekday/Weekend,3　Weekday/Weekend_0500_trip50101001,Mozal (102),0,,,50001
+5D,Weekday/Weekend,3　Weekday/Weekend_0800_trip50101001,Mozal (102),0,,,50001
+5D,Weekday/Weekend,3　Weekday/Weekend_1100_trip50101001,Mozal (102),0,,,50001
+5D,Weekday/Weekend,3　Weekday/Weekend_1400_trip50101001,Mozal (102),0,,,50001
+5D,Weekday/Weekend,3　Weekday/Weekend_1700_trip50101001,Mozal (102),0,,,50001
+5D,Weekday/Weekend,3　Weekday/Weekend_2000_trip50101001,Mozal (102),0,,,50001
+5C,Weekday/Weekend,3　Weekday/Weekend_0630_trip50102001,Zedequias Manganhela,1,,,50002
+5C,Weekday/Weekend,3　Weekday/Weekend_0930_trip50102001,Zedequias Manganhela,1,,,50002
+5C,Weekday/Weekend,3　Weekday/Weekend_1230_trip50102001,Zedequias Manganhela,1,,,50002
+5C,Weekday/Weekend,3　Weekday/Weekend_1530_trip50102001,Zedequias Manganhela,1,,,50002
+5C,Weekday/Weekend,3　Weekday/Weekend_1830_trip50102001,Zedequias Manganhela,1,,,50002
+5C,Weekday/Weekend,3　Weekday/Weekend_2130_trip50102001,Zedequias Manganhela,1,,,50002
+5F,Weekday/Weekend,3　Weekday/Weekend_0530_trip50201001,Mozal (102),0,,,50001
+5F,Weekday/Weekend,3　Weekday/Weekend_0835_trip50201001,Mozal (102),0,,,50001
+5F,Weekday/Weekend,3　Weekday/Weekend_1140_trip50201001,Mozal (102),0,,,50001
+5F,Weekday/Weekend,3　Weekday/Weekend_1445_trip50201001,Mozal (102),0,,,50001
+5F,Weekday/Weekend,3　Weekday/Weekend_1750_trip50201001,Mozal (102),0,,,50001
+5F,Weekday/Weekend,3　Weekday/Weekend_2100_trip50201001,Mozal (102),0,,,50001
+5E,Weekday/Weekend,3　Weekday/Weekend_0705_trip50202001,Zedequias Manganhela,1,,,50002
+5E,Weekday/Weekend,3　Weekday/Weekend_1010_trip50202001,Zedequias Manganhela,1,,,50002
+5E,Weekday/Weekend,3　Weekday/Weekend_1315_trip50202001,Zedequias Manganhela,1,,,50002
+5E,Weekday/Weekend,3　Weekday/Weekend_1620_trip50202001,Zedequias Manganhela,1,,,50002
+5E,Weekday/Weekend,3　Weekday/Weekend_1925_trip50202001,Zedequias Manganhela,1,,,50002
+5E,Weekday/Weekend,3　Weekday/Weekend_2230_trip50202001,Zedequias Manganhela,1,,,50002
+5H,Weekday/Weekend,3　Weekday/Weekend_0600_trip50301001,Mozal (102),0,,,50001
+5H,Weekday/Weekend,3　Weekday/Weekend_0905_trip50301001,Mozal (102),0,,,50001
+5H,Weekday/Weekend,3　Weekday/Weekend_1210_trip50301001,Mozal (102),0,,,50001
+5H,Weekday/Weekend,3　Weekday/Weekend_1515_trip50301001,Mozal (102),0,,,50001
+5H,Weekday/Weekend,3　Weekday/Weekend_1820_trip50301001,Mozal (102),0,,,50001
+5H,Weekday/Weekend,3　Weekday/Weekend_2130_trip50301001,Mozal (102),0,,,50001
+5G,Weekday/Weekend,3　Weekday/Weekend_0735_trip50302001,Zedequias Manganhela,1,,,50002
+5G,Weekday/Weekend,3　Weekday/Weekend_1040_trip50302001,Zedequias Manganhela,1,,,50002
+5G,Weekday/Weekend,3　Weekday/Weekend_1345_trip50302001,Zedequias Manganhela,1,,,50002
+5G,Weekday/Weekend,3　Weekday/Weekend_1650_trip50302001,Zedequias Manganhela,1,,,50002
+5G,Weekday/Weekend,3　Weekday/Weekend_1955_trip50302001,Zedequias Manganhela,1,,,50002
+5G,Weekday/Weekend,3　Weekday/Weekend_2300_trip50302001,Zedequias Manganhela,1,,,50002
+51B,Weekday/Weekend,3　Weekday/Weekend_0400_trip51001001,Rádio Marconi (108),0,,,51001
+51B,Weekday/Weekend,3　Weekday/Weekend_0710_trip51001001,Rádio Marconi (108),0,,,51001
+51B,Weekday/Weekend,3　Weekday/Weekend_1020_trip51001001,Rádio Marconi (108),0,,,51001
+51B,Weekday/Weekend,3　Weekday/Weekend_1330_trip51001001,Rádio Marconi (108),0,,,51001
+51B,Weekday/Weekend,3　Weekday/Weekend_1640_trip51001001,Rádio Marconi (108),0,,,51001
+51B,Weekday/Weekend,3　Weekday/Weekend_1950_trip51001001,Rádio Marconi (108),0,,,51001
+51,Weekday/Weekend,3　Weekday/Weekend_0535_trip51002001,Zedequias Manganhela,1,,,51002
+51,Weekday/Weekend,3　Weekday/Weekend_0845_trip51002001,Zedequias Manganhela,1,,,51002
+51,Weekday/Weekend,3　Weekday/Weekend_1155_trip51002001,Zedequias Manganhela,1,,,51002
+51,Weekday/Weekend,3　Weekday/Weekend_1505_trip51002001,Zedequias Manganhela,1,,,51002
+51,Weekday/Weekend,3　Weekday/Weekend_1815_trip51002001,Zedequias Manganhela,1,,,51002
+51,Weekday/Weekend,3　Weekday/Weekend_2125_trip51002001,Zedequias Manganhela,1,,,51002
+51H,Weekday/Weekend,3　Weekday/Weekend_0500_trip51101001,Rádio Marconi (108),0,,,51001
+51H,Weekday/Weekend,3　Weekday/Weekend_0810_trip51101001,Rádio Marconi (108),0,,,51001
+51H,Weekday/Weekend,3　Weekday/Weekend_1120_trip51101001,Rádio Marconi (108),0,,,51001
+51H,Weekday/Weekend,3　Weekday/Weekend_1430_trip51101001,Rádio Marconi (108),0,,,51001
+51H,Weekday/Weekend,3　Weekday/Weekend_1740_trip51101001,Rádio Marconi (108),0,,,51001
+51H,Weekday/Weekend,3　Weekday/Weekend_2050_trip51101001,Rádio Marconi (108),0,,,51001
+51G,Weekday/Weekend,3　Weekday/Weekend_0635_trip51102001,Zedequias Manganhela,1,,,51002
+51G,Weekday/Weekend,3　Weekday/Weekend_0945_trip51102001,Zedequias Manganhela,1,,,51002
+51G,Weekday/Weekend,3　Weekday/Weekend_1255_trip51102001,Zedequias Manganhela,1,,,51002
+51G,Weekday/Weekend,3　Weekday/Weekend_1605_trip51102001,Zedequias Manganhela,1,,,51002
+51G,Weekday/Weekend,3　Weekday/Weekend_1915_trip51102001,Zedequias Manganhela,1,,,51002
+51G,Weekday/Weekend,3　Weekday/Weekend_2225_trip51102001,Zedequias Manganhela,1,,,51002
+51J,Weekday/Weekend,3　Weekday/Weekend_0400_trip51201001,Barragem de Mafuiane,0,,,51201
+51J,Weekday/Weekend,3　Weekday/Weekend_0710_trip51201001,Barragem de Mafuiane,0,,,51201
+51J,Weekday/Weekend,3　Weekday/Weekend_1020_trip51201001,Barragem de Mafuiane,0,,,51201
+51J,Weekday/Weekend,3　Weekday/Weekend_1330_trip51201001,Barragem de Mafuiane,0,,,51201
+51J,Weekday/Weekend,3　Weekday/Weekend_1640_trip51201001,Barragem de Mafuiane,0,,,51201
+51J,Weekday/Weekend,3　Weekday/Weekend_1950_trip51201001,Barragem de Mafuiane,0,,,51201
+51I,Weekday/Weekend,3　Weekday/Weekend_0535_trip51202001,Zedequias Manganhela,1,,,51202
+51I,Weekday/Weekend,3　Weekday/Weekend_0845_trip51202001,Zedequias Manganhela,1,,,51202
+51I,Weekday/Weekend,3　Weekday/Weekend_1155_trip51202001,Zedequias Manganhela,1,,,51202
+51I,Weekday/Weekend,3　Weekday/Weekend_1505_trip51202001,Zedequias Manganhela,1,,,51202
+51I,Weekday/Weekend,3　Weekday/Weekend_1815_trip51202001,Zedequias Manganhela,1,,,51202
+51I,Weekday/Weekend,3　Weekday/Weekend_2125_trip51202001,Zedequias Manganhela,1,,,51202
+51L,Weekday/Weekend,3　Weekday/Weekend_0420_trip51301001,Boane (101),0,,,51301
+51L,Weekday/Weekend,3　Weekday/Weekend_0710_trip51301001,Boane (101),0,,,51301
+51L,Weekday/Weekend,3　Weekday/Weekend_1000_trip51301001,Boane (101),0,,,51301
+51L,Weekday/Weekend,3　Weekday/Weekend_1250_trip51301001,Boane (101),0,,,51301
+51L,Weekday/Weekend,3　Weekday/Weekend_1540_trip51301001,Boane (101),0,,,51301
+51L,Weekday/Weekend,3　Weekday/Weekend_1825_trip51301001,Boane (101),0,,,51301
+51K,Weekday/Weekend,3　Weekday/Weekend_0545_trip51302001,Zedequias Manganhela,1,,,51302
+51K,Weekday/Weekend,3　Weekday/Weekend_0835_trip51302001,Zedequias Manganhela,1,,,51302
+51K,Weekday/Weekend,3　Weekday/Weekend_1125_trip51302001,Zedequias Manganhela,1,,,51302
+51K,Weekday/Weekend,3　Weekday/Weekend_1415_trip51302001,Zedequias Manganhela,1,,,51302
+51K,Weekday/Weekend,3　Weekday/Weekend_1705_trip51302001,Zedequias Manganhela,1,,,51302
+51K,Weekday/Weekend,3　Weekday/Weekend_1950_trip51302001,Zedequias Manganhela,1,,,51302
+51N,Weekday/Weekend,3　Weekday/Weekend_0440_trip51401001,Boane (101),0,,,51301
+51N,Weekday/Weekend,3　Weekday/Weekend_0730_trip51401001,Boane (101),0,,,51301
+51N,Weekday/Weekend,3　Weekday/Weekend_1020_trip51401001,Boane (101),0,,,51301
+51N,Weekday/Weekend,3　Weekday/Weekend_1310_trip51401001,Boane (101),0,,,51301
+51N,Weekday/Weekend,3　Weekday/Weekend_1600_trip51401001,Boane (101),0,,,51301
+51N,Weekday/Weekend,3　Weekday/Weekend_1850_trip51401001,Boane (101),0,,,51301
+51M,Weekday/Weekend,3　Weekday/Weekend_0605_trip51402001,Zedequias Manganhela,1,,,51302
+51M,Weekday/Weekend,3　Weekday/Weekend_0855_trip51402001,Zedequias Manganhela,1,,,51302
+51M,Weekday/Weekend,3　Weekday/Weekend_1145_trip51402001,Zedequias Manganhela,1,,,51302
+51M,Weekday/Weekend,3　Weekday/Weekend_1435_trip51402001,Zedequias Manganhela,1,,,51302
+51M,Weekday/Weekend,3　Weekday/Weekend_1725_trip51402001,Zedequias Manganhela,1,,,51302
+51M,Weekday/Weekend,3　Weekday/Weekend_2015_trip51402001,Zedequias Manganhela,1,,,51302
+51P,Weekday/Weekend,3　Weekday/Weekend_0450_trip51501001,Boane (101),0,,,51301
+51P,Weekday/Weekend,3　Weekday/Weekend_0740_trip51501001,Boane (101),0,,,51301
+51P,Weekday/Weekend,3　Weekday/Weekend_1030_trip51501001,Boane (101),0,,,51301
+51P,Weekday/Weekend,3　Weekday/Weekend_1320_trip51501001,Boane (101),0,,,51301
+51P,Weekday/Weekend,3　Weekday/Weekend_1610_trip51501001,Boane (101),0,,,51301
+51P,Weekday/Weekend,3　Weekday/Weekend_1900_trip51501001,Boane (101),0,,,51301
+51O,Weekday/Weekend,3　Weekday/Weekend_0615_trip51502001,Zedequias Manganhela,1,,,51302
+51O,Weekday/Weekend,3　Weekday/Weekend_0905_trip51502001,Zedequias Manganhela,1,,,51302
+51O,Weekday/Weekend,3　Weekday/Weekend_1155_trip51502001,Zedequias Manganhela,1,,,51302
+51O,Weekday/Weekend,3　Weekday/Weekend_1445_trip51502001,Zedequias Manganhela,1,,,51302
+51O,Weekday/Weekend,3　Weekday/Weekend_1735_trip51502001,Zedequias Manganhela,1,,,51302
+51O,Weekday/Weekend,3　Weekday/Weekend_2025_trip51502001,Zedequias Manganhela,1,,,51302
+51R,Weekday/Weekend,3　Weekday/Weekend_0510_trip51601001,Boane (101),0,,,51301
+51R,Weekday/Weekend,3　Weekday/Weekend_0800_trip51601001,Boane (101),0,,,51301
+51R,Weekday/Weekend,3　Weekday/Weekend_1050_trip51601001,Boane (101),0,,,51301
+51R,Weekday/Weekend,3　Weekday/Weekend_1350_trip51601001,Boane (101),0,,,51301
+51R,Weekday/Weekend,3　Weekday/Weekend_1640_trip51601001,Boane (101),0,,,51301
+51R,Weekday/Weekend,3　Weekday/Weekend_1930_trip51601001,Boane (101),0,,,51301
+51Q,Weekday/Weekend,3　Weekday/Weekend_0635_trip51602001,Zedequias Manganhela,1,,,51302
+51Q,Weekday/Weekend,3　Weekday/Weekend_0925_trip51602001,Zedequias Manganhela,1,,,51302
+51Q,Weekday/Weekend,3　Weekday/Weekend_1215_trip51602001,Zedequias Manganhela,1,,,51302
+51Q,Weekday/Weekend,3　Weekday/Weekend_1515_trip51602001,Zedequias Manganhela,1,,,51302
+51Q,Weekday/Weekend,3　Weekday/Weekend_1805_trip51602001,Zedequias Manganhela,1,,,51302
+51Q,Weekday/Weekend,3　Weekday/Weekend_2055_trip51602001,Zedequias Manganhela,1,,,51302
+51T,Weekday/Weekend,3　Weekday/Weekend_0520_trip51701001,Boane (101),0,,,51301
+51T,Weekday/Weekend,3　Weekday/Weekend_0815_trip51701001,Boane (101),0,,,51301
+51T,Weekday/Weekend,3　Weekday/Weekend_1110_trip51701001,Boane (101),0,,,51301
+51T,Weekday/Weekend,3　Weekday/Weekend_1410_trip51701001,Boane (101),0,,,51301
+51T,Weekday/Weekend,3　Weekday/Weekend_1705_trip51701001,Boane (101),0,,,51301
+51T,Weekday/Weekend,3　Weekday/Weekend_2000_trip51701001,Boane (101),0,,,51301
+51S,Weekday/Weekend,3　Weekday/Weekend_0645_trip51702001,Zedequias Manganhela,1,,,51302
+51S,Weekday/Weekend,3　Weekday/Weekend_0940_trip51702001,Zedequias Manganhela,1,,,51302
+51S,Weekday/Weekend,3　Weekday/Weekend_1235_trip51702001,Zedequias Manganhela,1,,,51302
+51S,Weekday/Weekend,3　Weekday/Weekend_1535_trip51702001,Zedequias Manganhela,1,,,51302
+51S,Weekday/Weekend,3　Weekday/Weekend_1830_trip51702001,Zedequias Manganhela,1,,,51302
+51S,Weekday/Weekend,3　Weekday/Weekend_2125_trip51702001,Zedequias Manganhela,1,,,51302
+51V,Weekday/Weekend,3　Weekday/Weekend_0530_trip51801001,Boane (101),0,,,51301
+51V,Weekday/Weekend,3　Weekday/Weekend_0830_trip51801001,Boane (101),0,,,51301
+51V,Weekday/Weekend,3　Weekday/Weekend_1130_trip51801001,Boane (101),0,,,51301
+51V,Weekday/Weekend,3　Weekday/Weekend_1430_trip51801001,Boane (101),0,,,51301
+51V,Weekday/Weekend,3　Weekday/Weekend_1730_trip51801001,Boane (101),0,,,51301
+51V,Weekday/Weekend,3　Weekday/Weekend_2030_trip51801001,Boane (101),0,,,51301
+51U,Weekday/Weekend,3　Weekday/Weekend_0700_trip51802001,Zedequias Manganhela,1,,,51302
+51U,Weekday/Weekend,3　Weekday/Weekend_1000_trip51802001,Zedequias Manganhela,1,,,51302
+51U,Weekday/Weekend,3　Weekday/Weekend_1300_trip51802001,Zedequias Manganhela,1,,,51302
+51U,Weekday/Weekend,3　Weekday/Weekend_1600_trip51802001,Zedequias Manganhela,1,,,51302
+51U,Weekday/Weekend,3　Weekday/Weekend_1900_trip51802001,Zedequias Manganhela,1,,,51302
+51U,Weekday/Weekend,3　Weekday/Weekend_2200_trip51802001,Zedequias Manganhela,1,,,51302
+51X,Weekday/Weekend,3　Weekday/Weekend_0540_trip51901001,Boane (101),0,,,51301
+51X,Weekday/Weekend,3　Weekday/Weekend_0845_trip51901001,Boane (101),0,,,51301
+51X,Weekday/Weekend,3　Weekday/Weekend_1150_trip51901001,Boane (101),0,,,51301
+51X,Weekday/Weekend,3　Weekday/Weekend_1455_trip51901001,Boane (101),0,,,51301
+51X,Weekday/Weekend,3　Weekday/Weekend_1800_trip51901001,Boane (101),0,,,51301
+51X,Weekday/Weekend,3　Weekday/Weekend_2100_trip51901001,Boane (101),0,,,51301
+51W,Weekday/Weekend,3　Weekday/Weekend_0710_trip51902001,Zedequias Manganhela,1,,,51302
+51W,Weekday/Weekend,3　Weekday/Weekend_1015_trip51902001,Zedequias Manganhela,1,,,51302
+51W,Weekday/Weekend,3　Weekday/Weekend_1320_trip51902001,Zedequias Manganhela,1,,,51302
+51W,Weekday/Weekend,3　Weekday/Weekend_1625_trip51902001,Zedequias Manganhela,1,,,51302
+51W,Weekday/Weekend,3　Weekday/Weekend_1930_trip51902001,Zedequias Manganhela,1,,,51302
+51W,Weekday/Weekend,3　Weekday/Weekend_2230_trip51902001,Zedequias Manganhela,1,,,51302
+51D,Weekday/Weekend,3　Weekday/Weekend_0550_trip52001001,Boane (101),0,,,51301
+51D,Weekday/Weekend,3　Weekday/Weekend_0900_trip52001001,Boane (101),0,,,51301
+51D,Weekday/Weekend,3　Weekday/Weekend_1210_trip52001001,Boane (101),0,,,51301
+51D,Weekday/Weekend,3　Weekday/Weekend_1520_trip52001001,Boane (101),0,,,51301
+51D,Weekday/Weekend,3　Weekday/Weekend_1830_trip52001001,Boane (101),0,,,51301
+51D,Weekday/Weekend,3　Weekday/Weekend_2145_trip52001001,Boane (101),0,,,51301
+51C,Weekday/Weekend,3　Weekday/Weekend_0725_trip52002001,Zedequias Manganhela,1,,,51302
+51C,Weekday/Weekend,3　Weekday/Weekend_1035_trip52002001,Zedequias Manganhela,1,,,51302
+51C,Weekday/Weekend,3　Weekday/Weekend_1345_trip52002001,Zedequias Manganhela,1,,,51302
+51C,Weekday/Weekend,3　Weekday/Weekend_1655_trip52002001,Zedequias Manganhela,1,,,51302
+51C,Weekday/Weekend,3　Weekday/Weekend_2005_trip52002001,Zedequias Manganhela,1,,,51302
+51C,Weekday/Weekend,3　Weekday/Weekend_2315_trip52002001,Zedequias Manganhela,1,,,51302
+51F,Weekday/Weekend,3　Weekday/Weekend_0600_trip52101001,Boane (101),0,,,51301
+51F,Weekday/Weekend,3　Weekday/Weekend_0910_trip52101001,Boane (101),0,,,51301
+51F,Weekday/Weekend,3　Weekday/Weekend_1220_trip52101001,Boane (101),0,,,51301
+51F,Weekday/Weekend,3　Weekday/Weekend_1535_trip52101001,Boane (101),0,,,51301
+51F,Weekday/Weekend,3　Weekday/Weekend_1845_trip52101001,Boane (101),0,,,51301
+51F,Weekday/Weekend,3　Weekday/Weekend_2200_trip52101001,Boane (101),0,,,51301
+51E,Weekday/Weekend,3　Weekday/Weekend_0735_trip52102001,Zedequias Manganhela,1,,,51302
+51E,Weekday/Weekend,3　Weekday/Weekend_1045_trip52102001,Zedequias Manganhela,1,,,51302
+51E,Weekday/Weekend,3　Weekday/Weekend_1355_trip52102001,Zedequias Manganhela,1,,,51302
+51E,Weekday/Weekend,3　Weekday/Weekend_1715_trip52102001,Zedequias Manganhela,1,,,51302
+51E,Weekday/Weekend,3　Weekday/Weekend_2020_trip52102001,Zedequias Manganhela,1,,,51302
+51E,Weekday/Weekend,3　Weekday/Weekend_2335_trip52102001,Zedequias Manganhela,1,,,51302
+53B,Weekday/Weekend,3　Weekday/Weekend_0500_trip53001001,Albazine (401),0,,,53001
+53B,Weekday/Weekend,3　Weekday/Weekend_0730_trip53001001,Albazine (401),0,,,53001
+53B,Weekday/Weekend,3　Weekday/Weekend_1000_trip53001001,Albazine (401),0,,,53001
+53B,Weekday/Weekend,3　Weekday/Weekend_1230_trip53001001,Albazine (401),0,,,53001
+53B,Weekday/Weekend,3　Weekday/Weekend_1500_trip53001001,Albazine (401),0,,,53001
+53B,Weekday/Weekend,3　Weekday/Weekend_1730_trip53001001,Albazine (401),0,,,53001
+53,Weekday/Weekend,3　Weekday/Weekend_0614_trip53002001,Laurentina (Av. Guerra Popular),1,,,53002
+53,Weekday/Weekend,3　Weekday/Weekend_0844_trip53002001,Laurentina (Av. Guerra Popular),1,,,53002
+53,Weekday/Weekend,3　Weekday/Weekend_1114_trip53002001,Laurentina (Av. Guerra Popular),1,,,53002
+53,Weekday/Weekend,3　Weekday/Weekend_1344_trip53002001,Laurentina (Av. Guerra Popular),1,,,53002
+53,Weekday/Weekend,3　Weekday/Weekend_1614_trip53002001,Laurentina (Av. Guerra Popular),1,,,53002
+53,Weekday/Weekend,3　Weekday/Weekend_1844_trip53002001,Laurentina (Av. Guerra Popular),1,,,53002
+53D,Weekday/Weekend,3　Weekday/Weekend_0530_trip53101001,Albazine (401),0,,,53001
+53D,Weekday/Weekend,3　Weekday/Weekend_0815_trip53101001,Albazine (401),0,,,53001
+53D,Weekday/Weekend,3　Weekday/Weekend_1100_trip53101001,Albazine (401),0,,,53001
+53D,Weekday/Weekend,3　Weekday/Weekend_1630_trip53101001,Albazine (401),0,,,53001
+53D,Weekday/Weekend,3　Weekday/Weekend_1915_trip53101001,Albazine (401),0,,,53001
+53D,Weekday/Weekend,3　Weekday/Weekend_2200_trip53101001,Albazine (401),0,,,53001
+53C,Weekday/Weekend,3　Weekday/Weekend_0654_trip53102001,Laurentina (Av. Guerra Popular),1,,,53002
+53C,Weekday/Weekend,3　Weekday/Weekend_0939_trip53102001,Laurentina (Av. Guerra Popular),1,,,53002
+53C,Weekday/Weekend,3　Weekday/Weekend_1224_trip53102001,Laurentina (Av. Guerra Popular),1,,,53002
+53C,Weekday/Weekend,3　Weekday/Weekend_1754_trip53102001,Laurentina (Av. Guerra Popular),1,,,53002
+53C,Weekday/Weekend,3　Weekday/Weekend_2039_trip53102001,Laurentina (Av. Guerra Popular),1,,,53002
+53C,Weekday/Weekend,3　Weekday/Weekend_2324_trip53102001,Laurentina (Av. Guerra Popular),1,,,53002

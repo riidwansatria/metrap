@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url,agency_email
+EMTPM01,EMTPM,http://www.emtpm.co.mz/index.php/horario-das-carreiras,Africa/Maputo,pt,258823104635,http://www.emtpm.co.mz/index.php/horario-das-carreiras, emtpm@emtpm.co.mz
