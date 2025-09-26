@@ -214,24 +214,22 @@ with tab1:
             ))
         
         fig.update_layout(
-            map_style="open-street-map",
             map=dict(
                 center=dict(lat=-25.9653, lon=32.5832),
                 zoom=10
             ),
             height=500,
-            margin=dict(l=0, r=0, t=0, b=0),
+            margin=dict(l=0, r=0, t=0, b=60),
             showlegend=True,
             legend=dict(
                 yanchor="top",
                 y=0.99,
                 xanchor="left",
-                x=0.01,
-                bgcolor="rgba(255, 255, 255, 0.8)"
+                x=0.01
             )
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, theme="streamlit")
         st.info(f"Showing {len(gps_sample)} GPS points (sampled from {len(gps_gdf)} total points)")
     
     st.divider()
@@ -245,13 +243,13 @@ with tab1:
         st.write(f"Total lines: {len(lines_gdf)}")
         st.info("Lines data loaded from codebase")
         
-        if st.checkbox("Show lines data preview"):
-            st.dataframe(lines_gdf.head())
-        
         st.subheader("Available Bus Lines")
         if 'line_id' in lines_gdf.columns and 'route_label' in lines_gdf.columns:
             for _, row in lines_gdf.iterrows():
                 st.write(f"**{row['line_id']}**: {row['route_label']}")
+
+        if st.checkbox("Show lines data preview"):
+            st.dataframe(lines_gdf.head(17))
     
     with col2:
         data_source = "(Uploaded)" if uploaded_gps else "(Sample)"
@@ -262,9 +260,6 @@ with tab1:
             st.success(f"Using uploaded file: {uploaded_gps.name}")
         else:
             st.info("Using sample GPS data from codebase")
-            
-        if st.checkbox("Show GPS data preview"):
-            st.dataframe(gps_gdf.head())
         
         st.subheader("GPS Statistics")
         if 'speed_kmh' in gps_gdf.columns:
@@ -275,6 +270,9 @@ with tab1:
             st.write("**Time Range:**")
             st.write(f"From: {gps_gdf['timestamp'].min()}")
             st.write(f"To: {gps_gdf['timestamp'].max()}")
+
+        if st.checkbox("Show GPS data preview"):
+            st.dataframe(gps_gdf.head())
 
 # Tab 2: GPS Analysis
 with tab2:
@@ -412,6 +410,7 @@ with tab3:
                     
                     st.session_state.scheduled_trips_gdf = scheduled_trips_gdf
                     st.session_state.schedule_ref_line = ref_line
+                    st.session_state.selected_line_sched = selected_line_sched # Store selected line for comparison
                     
                     st.success(f"Schedule analysis completed for routes: {', '.join(route_ids)}")
                     
@@ -442,32 +441,53 @@ with tab4:
     if gps_available and schedule_available:
         st.subheader("GPS vs Scheduled Operations")
         
+        # Get data from session state
+        gps_df = st.session_state.gps_result_gdf
+        schedule_df = st.session_state.scheduled_trips_gdf
+
+        # Get available lines and routes from the completed analyses
+        # The line selector will only have one option based on the current app flow,
+        # but is included as requested for future extensibility.
+        available_lines = [st.session_state.get('selected_line', 'N/A')]
+        available_routes = schedule_df['route_id'].unique().tolist() if 'route_id' in schedule_df.columns else []
+
         col1, col2 = st.columns(2)
         with col1:
-            time_col_gps = st.selectbox(
-                "GPS Time Column", 
-                st.session_state.gps_result_gdf.columns.tolist()
+            # Direct selector for Line ID
+            selected_line_id = st.selectbox(
+                "Select Line ID to Compare",
+                options=available_lines,
+                index=0
             )
         with col2:
-            time_col_sched = st.selectbox(
-                "Schedule Time Column", 
-                st.session_state.scheduled_trips_gdf.columns.tolist()
+            # Direct selector for Route IDs
+            selected_route_ids = st.multiselect(
+                "Select Route IDs to Compare",
+                options=available_routes,
+                default=available_routes
             )
         
         if st.button("Generate Comparison Plot", type="primary"):
-            with st.spinner("Creating comparison visualization..."):
-                try:
-                    plt.ioff()  # Turn off interactive mode
-                    utils.plot_gps_vs_scheduled(
-                        st.session_state.gps_result_gdf, 
-                        st.session_state.scheduled_trips_gdf,
-                        gps_time_col=time_col_gps, 
-                        sched_time_col=time_col_sched
-                    )
-                    st.pyplot(plt.gcf())
-                    plt.close()  # Close the figure properly
-                except Exception as e:
-                    st.error(f"Error creating comparison plot: {str(e)}")
+            if not selected_route_ids:
+                st.warning("Please select at least one Route ID to generate the plot.")
+            else:
+                with st.spinner("Creating comparison visualization..."):
+                    try:
+                        # Filter the schedule data based on user selection
+                        # The GPS data is already for the selected line
+                        filtered_schedule_df = schedule_df[schedule_df['route_id'].isin(selected_route_ids)]
+
+                        plt.ioff()  # Turn off interactive mode
+                        utils.plot_gps_vs_scheduled(
+                            gps_df, 
+                            filtered_schedule_df,
+                            gps_time_col='timestamp',      # Use direct column name
+                            sched_time_col='arrival_time'  # Use direct column name
+                        )
+                        st.pyplot(plt.gcf())
+                        plt.close()  # Close the figure properly
+                    except Exception as e:
+                        st.error(f"Error creating comparison plot: {str(e)}")
     else:
         st.warning("Please complete both GPS Analysis and Schedule Analysis before running comparative analysis.")
         
@@ -476,14 +496,14 @@ with tab4:
         col1, col2 = st.columns(2)
         with col1:
             if gps_available:
-                st.success("GPS Analysis: Completed")
+                st.success("✅ GPS Analysis: Completed")
             else:
-                st.error("GPS Analysis: Not completed")
+                st.error("❌ GPS Analysis: Not completed")
         with col2:
             if schedule_available:
-                st.success("Schedule Analysis: Completed")
+                st.success("✅ Schedule Analysis: Completed")
             else:
-                st.error("Schedule Analysis: Not completed")
+                st.error("❌ Schedule Analysis: Not completed")
 
 # Footer
 st.divider()
@@ -500,7 +520,7 @@ if st.sidebar.button("Create Outputs Directory"):
 
 if st.sidebar.button("Clear Session Data"):
     for key in list(st.session_state.keys()):
-        if key.startswith(('gps_', 'scheduled_', 'lines_', 'data_loaded', 'available_routes')):
+        if key.startswith(('gps_', 'scheduled_', 'lines_', 'data_loaded', 'available_routes', 'ref_line', 'selected_')):
             del st.session_state[key]
     st.sidebar.success("Session data cleared!")
     st.rerun()
