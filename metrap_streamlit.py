@@ -51,21 +51,19 @@ def load_lines_data(lines_path):
         st.error(f"Error loading lines data: {str(e)}")
         return None
 
-@st.cache_data
 def process_gps_data(gps_file=None):
     """Process GPS data from upload or sample file"""
     try:
         if gps_file is not None:
-            # Process uploaded file
-            return pd.read_csv(gps_file)
+            # Process uploaded file by passing the file object
+            return utils.load_gps_from_csv(gps_file)
         else:
-            # Use sample data
+            # Use sample data by passing the file path
             return utils.load_gps_from_csv(SAMPLE_GPS_PATH)
     except Exception as e:
         st.error(f"Error processing GPS data: {str(e)}")
         return None
 
-@st.cache_data
 def create_map_data(_lines_gdf, _gps_gdf):
     """Process map data for Plotly visualization"""
     try:

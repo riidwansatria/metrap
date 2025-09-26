@@ -42,53 +42,47 @@ def load_data(filepath, **kwargs):
         print(f"❌ Error loading {filepath}: {e}")
         return None
 
-def load_gps_from_csv(filepath, **kwargs):
+def load_gps_from_csv(filepath_or_buffer, **kwargs):
     """
-    Load GPS data from CSV and convert to GeoDataFrame.
-    
-    Parameters:
-    -----------
-    filepath : str or Path
-        Path to the CSV file (e.g., '../data/zg11_20250915.csv')
-    **kwargs : dict
-        Additional arguments for pd.read_csv()
-    
-    Returns:
-    --------
-    gpd.GeoDataFrame
-        GeoDataFrame with renamed columns and geometry
+    Load GPS data from a CSV file path or buffer and convert to GeoDataFrame.
+    Handles both UTF-8 and Shift-JIS encodings.
     """
-    filepath = Path(filepath)
-    
-    if not filepath.exists():
-        print(f"❌ File not found: {filepath}")
-        return None
-    
     try:
-        # Load data
-        gps_df = pd.read_csv(filepath, **kwargs)
-        
-        # Rename columns to English
+        try:
+            # First, try to read the file with the standard UTF-8 encoding
+            gps_df = pd.read_csv(filepath_or_buffer, **kwargs)
+        except UnicodeDecodeError:
+            # If UTF-8 fails, reset the buffer and try again with Shift-JIS
+            print("⚠️ UTF-8 decoding failed, trying with Shift-JIS encoding...")
+            if hasattr(filepath_or_buffer, 'seek'):
+                filepath_or_buffer.seek(0)
+            gps_df = pd.read_csv(filepath_or_buffer, encoding='shift-jis', **kwargs)
+
+        # Rename columns to English if they exist
         column_mapping = {
             '時刻': 'timestamp',
-            '緯度': 'lat', 
+            '緯度': 'lat',
             '経度': 'lon',
             '速度(km/h)': 'speed_kmh',
             '方向': 'direction'
         }
-        gps_df = gps_df.rename(columns=column_mapping)
+        if '時刻' in gps_df.columns:
+            gps_df = gps_df.rename(columns=column_mapping)
         
+        # Verify that essential columns exist
+        if not all(col in gps_df.columns for col in ['lat', 'lon']):
+            raise ValueError("CSV must contain 'lat'/'緯度' and 'lon'/'経度' columns.")
+
         # Convert to GeoDataFrame
         gps_gdf = gpd.GeoDataFrame(
             gps_df,
             geometry=gpd.points_from_xy(gps_df.lon, gps_df.lat),
             crs="EPSG:4326"
         )
-        
         return gps_gdf
         
     except Exception as e:
-        print(f"❌ Error loading GPS data from {filepath}: {e}")
+        print(f"❌ Error loading GPS data: {e}")
         return None
     
 def load_gtfs_stops(gtfs_folder, utm_crs="EPSG:32736"):
