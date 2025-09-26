@@ -2,7 +2,5 @@ streamlit
 pandas
 plotly
 matplotlib
-geopandas
 numpy
 seaborn
-shapely
