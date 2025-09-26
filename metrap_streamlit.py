@@ -1,0 +1,506 @@
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import io
+import sys
+from contextlib import redirect_stdout
+
+# Import utils module
+try:
+    import utils
+except ImportError:
+    st.error("Utils module not found. Please ensure utils.py is in the same directory or in Python path.")
+    st.stop()
+
+# Page configuration
+st.set_page_config(
+    page_title="METRAP Bus Operations Analysis",
+    page_icon="🚌",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Title and description
+st.title("METRAP Bus Operations Analysis")
+st.markdown("**Using Bus GPS traces and GTFS data**")
+
+# Sidebar for configuration
+st.sidebar.header("Configuration")
+
+# File upload for GPS data only
+st.sidebar.subheader("Upload GPS Data")
+uploaded_gps = st.sidebar.file_uploader(
+    "Upload GPS CSV File", 
+    type=['csv'], 
+    help="Upload your GPS tracking data in CSV format"
+)
+
+# Fixed paths for codebase data
+LINES_FILE_PATH = "./data/lines_gdf.gpkg"
+GTFS_DIR_PATH = "./data/gtfs"
+SAMPLE_GPS_PATH = "./data/zg11_20250915.csv"
+
+@st.cache_data
+def load_lines_data(lines_path):
+    """Load lines data from codebase"""
+    try:
+        return utils.load_data(lines_path)
+    except Exception as e:
+        st.error(f"Error loading lines data: {str(e)}")
+        return None
+
+@st.cache_data
+def process_gps_data(gps_file=None):
+    """Process GPS data from upload or sample file"""
+    try:
+        if gps_file is not None:
+            # Process uploaded file
+            return pd.read_csv(gps_file)
+        else:
+            # Use sample data
+            return utils.load_gps_from_csv(SAMPLE_GPS_PATH)
+    except Exception as e:
+        st.error(f"Error processing GPS data: {str(e)}")
+        return None
+
+@st.cache_data
+def create_map_data(_lines_gdf, _gps_gdf):
+    """Process map data for Plotly visualization"""
+    try:
+        from shapely.geometry import LineString
+        
+        # Process lines data
+        lines_data = []
+        for i, row in enumerate(_lines_gdf.itertuples()):
+            if hasattr(row, 'geometry') and row.geometry is not None:
+                if isinstance(row.geometry, LineString):
+                    geometries = [row.geometry]
+                else:
+                    geometries = row.geometry.geoms
+                
+                for geom in geometries:
+                    coords = list(geom.coords)
+                    lats, lons = zip(*[(y, x) for x, y in coords])
+                    lines_data.append({
+                        'line_id': getattr(row, 'line_id', f'Line {i}'),
+                        'route_label': getattr(row, 'route_label', 'N/A'),
+                        'lats': list(lats),
+                        'lons': list(lons)
+                    })
+        
+        # Sample GPS data for performance
+        gps_sample = _gps_gdf.sample(min(200, len(_gps_gdf))) if len(_gps_gdf) > 200 else _gps_gdf
+        
+        return lines_data, gps_sample
+        
+    except Exception as e:
+        st.error(f"Error processing map data: {str(e)}")
+        return [], pd.DataFrame()
+
+# Load data
+data_loaded = False
+
+if uploaded_gps is not None:
+    st.sidebar.success(f"GPS file uploaded: {uploaded_gps.name}")
+    with st.spinner("Loading data..."):
+        lines_gdf = load_lines_data(LINES_FILE_PATH)
+        gps_gdf = process_gps_data(uploaded_gps)
+        
+        if lines_gdf is not None and gps_gdf is not None:
+            st.session_state.lines_gdf = lines_gdf
+            st.session_state.gps_gdf = gps_gdf
+            st.session_state.data_loaded = True
+            data_loaded = True
+            st.sidebar.success("Data loaded successfully!")
+            st.sidebar.info(f"GPS points loaded: {len(gps_gdf)}")
+            st.sidebar.info(f"Bus lines available: {len(lines_gdf)}")
+
+elif st.sidebar.button("Load Sample Data"):
+    with st.spinner("Loading sample data..."):
+        lines_gdf = load_lines_data(LINES_FILE_PATH)
+        gps_gdf = process_gps_data()
+        
+        if lines_gdf is not None and gps_gdf is not None:
+            st.session_state.lines_gdf = lines_gdf
+            st.session_state.gps_gdf = gps_gdf
+            st.session_state.data_loaded = True
+            data_loaded = True
+            st.sidebar.success("Sample data loaded successfully!")
+            st.sidebar.info(f"GPS points loaded: {len(gps_gdf)}")
+            st.sidebar.info(f"Bus lines available: {len(lines_gdf)}")
+
+# Check if data exists in session state
+if 'data_loaded' in st.session_state and st.session_state.data_loaded:
+    data_loaded = True
+    lines_gdf = st.session_state.lines_gdf
+    gps_gdf = st.session_state.gps_gdf
+
+# Show instructions if no data loaded
+if not data_loaded:
+    st.info("Please upload your GPS CSV file or load sample data to get started.")
+    
+    st.subheader("Expected GPS CSV Format")
+    st.markdown("""
+    Your GPS CSV file should contain the following columns:
+    - **timestamp**: Date and time of GPS reading
+    - **lat**: Latitude coordinate  
+    - **lon**: Longitude coordinate
+    - **speed_kmh**: Speed in kilometers per hour (optional)
+    - **direction**: Direction/heading (optional)
+    
+    Example:
+    ```
+    timestamp,lat,lon,speed_kmh,direction
+    2025-09-15 08:00:00,-25.9653,32.5832,45.2,180
+    2025-09-15 08:01:00,-25.9663,32.5842,42.1,185
+    ```
+    """)
+    st.stop()
+
+# Main tabs
+tab1, tab2, tab3, tab4 = st.tabs([
+    "Overview & Map", 
+    "GPS Analysis", 
+    "Schedule Analysis", 
+    "Comparative Analysis"
+])
+
+# Tab 1: Overview & Map
+with tab1:
+    st.header("Data Overview & Map Visualization")
+    
+    # Interactive Map Section
+    st.subheader("Interactive Map")
+    
+    lines_data, gps_sample = create_map_data(lines_gdf, gps_gdf)
+    
+    if lines_data:
+        fig = go.Figure()
+        
+        # Add bus lines
+        colors = px.colors.qualitative.Set3 + px.colors.qualitative.Dark24
+        for i, line in enumerate(lines_data):
+            color = colors[i % len(colors)]
+            fig.add_trace(go.Scattermap(
+                mode="lines",
+                lon=line['lons'],
+                lat=line['lats'],
+                name=f"{line['line_id']}: {line['route_label']}",
+                line=dict(width=3, color=color),
+                hovertemplate=f"<b>{line['line_id']}</b><br>{line['route_label']}<extra></extra>"
+            ))
+        
+        # Add GPS points
+        if not gps_sample.empty:
+            hover_text = []
+            for _, row in gps_sample.iterrows():
+                text = f"Time: {row.timestamp}<br>"
+                if 'speed_kmh' in row and pd.notna(row.speed_kmh):
+                    text += f"Speed: {row.speed_kmh} km/h<br>"
+                if 'direction' in row and pd.notna(row.direction):
+                    text += f"Direction: {row.direction}"
+                hover_text.append(text)
+            
+            fig.add_trace(go.Scattermap(
+                mode="markers",
+                lon=gps_sample['lon'],
+                lat=gps_sample['lat'],
+                name="GPS Points",
+                marker=dict(size=5, color='red'),
+                text=hover_text,
+                hovertemplate="%{text}<extra></extra>"
+            ))
+        
+        fig.update_layout(
+            map_style="open-street-map",
+            map=dict(
+                center=dict(lat=-25.9653, lon=32.5832),
+                zoom=10
+            ),
+            height=500,
+            margin=dict(l=0, r=0, t=0, b=0),
+            showlegend=True,
+            legend=dict(
+                yanchor="top",
+                y=0.99,
+                xanchor="left",
+                x=0.01,
+                bgcolor="rgba(255, 255, 255, 0.8)"
+            )
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
+        st.info(f"Showing {len(gps_sample)} GPS points (sampled from {len(gps_gdf)} total points)")
+    
+    st.divider()
+    
+    # Data Overview Section
+    st.subheader("Data Overview")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Bus Lines Data (Codebase)")
+        st.write(f"Total lines: {len(lines_gdf)}")
+        st.info("Lines data loaded from codebase")
+        
+        if st.checkbox("Show lines data preview"):
+            st.dataframe(lines_gdf.head())
+        
+        st.subheader("Available Bus Lines")
+        if 'line_id' in lines_gdf.columns and 'route_label' in lines_gdf.columns:
+            for _, row in lines_gdf.iterrows():
+                st.write(f"**{row['line_id']}**: {row['route_label']}")
+    
+    with col2:
+        data_source = "(Uploaded)" if uploaded_gps else "(Sample)"
+        st.subheader(f"GPS Data {data_source}")
+        st.write(f"Total GPS points: {len(gps_gdf)}")
+        
+        if uploaded_gps:
+            st.success(f"Using uploaded file: {uploaded_gps.name}")
+        else:
+            st.info("Using sample GPS data from codebase")
+            
+        if st.checkbox("Show GPS data preview"):
+            st.dataframe(gps_gdf.head())
+        
+        st.subheader("GPS Statistics")
+        if 'speed_kmh' in gps_gdf.columns:
+            st.metric("Average Speed", f"{gps_gdf['speed_kmh'].mean():.1f} km/h")
+            st.metric("Max Speed", f"{gps_gdf['speed_kmh'].max():.1f} km/h")
+        
+        if 'timestamp' in gps_gdf.columns:
+            st.write("**Time Range:**")
+            st.write(f"From: {gps_gdf['timestamp'].min()}")
+            st.write(f"To: {gps_gdf['timestamp'].max()}")
+
+# Tab 2: GPS Analysis
+with tab2:
+    st.header("GPS Analysis")
+    
+    # Line selection
+    available_lines = lines_gdf['line_id'].unique() if 'line_id' in lines_gdf.columns else ['L5']
+    selected_line = st.selectbox("Select Line for Analysis", available_lines, index=0)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        flip_origin = st.checkbox("Flip Origin", value=False)
+        analyze_button = st.button("Analyze GPS Data", type="primary")
+    
+    with col2:
+        show_plots = st.checkbox("Show Analysis Plots", value=True)
+    
+    if analyze_button:
+        with st.spinner("Analyzing GPS data..."):
+            try:
+                # Capture print output from utils function
+                f = io.StringIO()
+                with redirect_stdout(f):
+                    gps_result_gdf, ref_line = utils.calculate_line_distance(
+                        gps_gdf, lines_gdf, line_id=selected_line, 
+                        plot=show_plots, flip_origin=flip_origin
+                    )
+                
+                # Get captured output
+                output = f.getvalue()
+                
+                # Store results
+                st.session_state.gps_result_gdf = gps_result_gdf
+                st.session_state.ref_line = ref_line
+                st.session_state.selected_line = selected_line
+                
+                st.success(f"GPS analysis completed for line {selected_line}")
+                
+                # Display captured print statements
+                if output:
+                    st.subheader("Analysis Output")
+                    for line in output.strip().split('\n'):
+                        if line.strip():
+                            st.text(line)
+                
+                # Show matplotlib plots if generated
+                if show_plots:
+                    # Configure matplotlib to not show plots (prevents the warning)
+                    plt.ioff()  # Turn off interactive mode
+                    
+                    st.subheader("Distance Analysis Visualization")
+                    st.pyplot(plt.gcf())
+                    plt.close()  # Close the figure properly
+                    
+                    # Generate additional detailed analysis plots immediately
+                    st.subheader("Detailed Analysis")
+                    utils.plot_distance_analysis(gps_result_gdf, line_id=selected_line)
+                    st.pyplot(plt.gcf())
+                    plt.close()  # Close the figure properly
+                
+                # Display key metrics
+                if 'distance_along_line_km' in gps_result_gdf.columns:
+                    st.subheader("Key Statistics")
+                    col_a, col_b, col_c = st.columns(3)
+                    with col_a:
+                        st.metric("Min Distance", f"{gps_result_gdf['distance_along_line_km'].min():.2f} km")
+                    with col_b:
+                        st.metric("Max Distance", f"{gps_result_gdf['distance_along_line_km'].max():.2f} km")
+                    with col_c:
+                        if 'offset_distance_m' in gps_result_gdf.columns:
+                            st.metric("Avg Offset", f"{gps_result_gdf['offset_distance_m'].mean():.1f} m")
+                
+                st.subheader("Analysis Results")
+                st.write(f"Processed {len(gps_result_gdf)} GPS points")
+                
+                if st.checkbox("Show processed GPS data"):
+                    st.dataframe(gps_result_gdf.head(10))
+                
+            except Exception as e:
+                st.error(f"Error during GPS analysis: {str(e)}")
+    
+    # Show previous results if available
+    elif 'gps_result_gdf' in st.session_state:
+        st.info("Previous GPS analysis results are available. Click 'Analyze GPS Data' to run a new analysis.")
+
+# Tab 3: Schedule Analysis
+with tab3:
+    st.header("Schedule Analysis")
+    
+    # Route selection
+    selected_line_sched = st.selectbox(
+        "Select Line for Schedule Analysis", 
+        lines_gdf['line_id'].unique() if 'line_id' in lines_gdf.columns else ['L5']
+    )
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("Get Available Routes"):
+            try:
+                with st.spinner("Getting available routes..."):
+                    routes = utils.get_routes_for_line(selected_line_sched)
+                    st.session_state.available_routes = routes
+                    
+                    st.write("Available routes:")
+                    for _, route in routes.iterrows():
+                        st.write(f"- Route ID: {route['route_id']}, Direction: {route['direction_id']}")
+                        
+            except Exception as e:
+                st.error(f"Error getting routes: {str(e)}")
+    
+    with col2:
+        # Route ID input
+        route_ids_input = st.text_input("Enter Route IDs (comma-separated)", "47E, 47F")
+        route_ids = [r.strip() for r in route_ids_input.split(',')]
+    
+    col3, col4 = st.columns(2)
+    with col3:
+        flip_origin_sched = st.checkbox("Flip Origin (Schedule)", value=False)
+        show_plots_sched = st.checkbox("Show Schedule Plots", value=True)
+    
+    with col4:
+        if st.button("Analyze Schedule Data", type="primary"):
+            with st.spinner("Processing schedule data..."):
+                try:
+                    scheduled_trips_gdf, ref_line = utils.create_scheduled_trips_from_gtfs(
+                        route_ids=route_ids,
+                        gtfs_dir=GTFS_DIR_PATH,
+                        lines_gdf=lines_gdf,
+                        line_id=selected_line_sched,
+                        plot=show_plots_sched,
+                        flip_origin=flip_origin_sched
+                    )
+                    
+                    st.session_state.scheduled_trips_gdf = scheduled_trips_gdf
+                    st.session_state.schedule_ref_line = ref_line
+                    
+                    st.success(f"Schedule analysis completed for routes: {', '.join(route_ids)}")
+                    
+                    # Show matplotlib plots if generated
+                    if show_plots_sched:
+                        plt.ioff()  # Turn off interactive mode
+                        st.subheader("Schedule Visualization")
+                        st.pyplot(plt.gcf())
+                        plt.close()  # Close the figure properly
+                    
+                    st.subheader("Schedule Results")
+                    st.write(f"Processed {len(scheduled_trips_gdf)} scheduled trips")
+                    
+                    if st.checkbox("Show schedule data preview"):
+                        st.dataframe(scheduled_trips_gdf.head())
+                        
+                except Exception as e:
+                    st.error(f"Error during schedule analysis: {str(e)}")
+
+# Tab 4: Comparative Analysis
+with tab4:
+    st.header("Comparative Analysis")
+    
+    # Check if both analyses are completed
+    gps_available = 'gps_result_gdf' in st.session_state
+    schedule_available = 'scheduled_trips_gdf' in st.session_state
+    
+    if gps_available and schedule_available:
+        st.subheader("GPS vs Scheduled Operations")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            time_col_gps = st.selectbox(
+                "GPS Time Column", 
+                st.session_state.gps_result_gdf.columns.tolist()
+            )
+        with col2:
+            time_col_sched = st.selectbox(
+                "Schedule Time Column", 
+                st.session_state.scheduled_trips_gdf.columns.tolist()
+            )
+        
+        if st.button("Generate Comparison Plot", type="primary"):
+            with st.spinner("Creating comparison visualization..."):
+                try:
+                    plt.ioff()  # Turn off interactive mode
+                    utils.plot_gps_vs_scheduled(
+                        st.session_state.gps_result_gdf, 
+                        st.session_state.scheduled_trips_gdf,
+                        gps_time_col=time_col_gps, 
+                        sched_time_col=time_col_sched
+                    )
+                    st.pyplot(plt.gcf())
+                    plt.close()  # Close the figure properly
+                except Exception as e:
+                    st.error(f"Error creating comparison plot: {str(e)}")
+    else:
+        st.warning("Please complete both GPS Analysis and Schedule Analysis before running comparative analysis.")
+        
+        # Show status
+        st.subheader("Analysis Status")
+        col1, col2 = st.columns(2)
+        with col1:
+            if gps_available:
+                st.success("GPS Analysis: Completed")
+            else:
+                st.error("GPS Analysis: Not completed")
+        with col2:
+            if schedule_available:
+                st.success("Schedule Analysis: Completed")
+            else:
+                st.error("Schedule Analysis: Not completed")
+
+# Footer
+st.divider()
+st.markdown("**METRAP Bus Operations Analysis** - Built with Streamlit")
+
+# Sidebar utilities
+st.sidebar.divider()
+st.sidebar.subheader("Utilities")
+
+if st.sidebar.button("Create Outputs Directory"):
+    import os
+    os.makedirs("./outputs", exist_ok=True)
+    st.sidebar.success("Outputs directory created!")
+
+if st.sidebar.button("Clear Session Data"):
+    for key in list(st.session_state.keys()):
+        if key.startswith(('gps_', 'scheduled_', 'lines_', 'data_loaded', 'available_routes')):
+            del st.session_state[key]
+    st.sidebar.success("Session data cleared!")
+    st.rerun()
