@@ -141,7 +141,7 @@ def load_gtfs_stops(gtfs_folder, utm_crs="EPSG:32736"):
 # GPS LINE DISTANCE ANALYSIS
 # ============================================================================
 
-def calculate_line_distance(gps_gdf, lines_gdf, line_id, utm_crs="EPSG:32736", plot=True, flip_origin=True):
+def calculate_line_distance(gps_gdf, lines_gdf, line_id, utm_crs="EPSG:32736", plot=True, flip_origin=False):
     """
     Calculate distances along reference line for GPS points, restricted to one line_id.
     
@@ -157,6 +157,8 @@ def calculate_line_distance(gps_gdf, lines_gdf, line_id, utm_crs="EPSG:32736", p
         UTM coordinate reference system for distance calculations
     plot : bool, default True
         Whether to create visualization plots
+    flip_origin : bool, default False
+        Whether to reverse the start/end of the reference line
     
     Returns:
     --------
@@ -233,9 +235,9 @@ def calculate_line_distance(gps_gdf, lines_gdf, line_id, utm_crs="EPSG:32736", p
         
         # Distance scatter plot
         ax2.scatter(result_gdf['distance_along_line_km'], 
-                   result_gdf['offset_distance_m'],
-                   color="red",
-                   alpha=0.5, s=1)
+                    result_gdf['offset_distance_m'],
+                    color="red",
+                    alpha=0.5, s=1)
         ax2.set_xlabel('Distance Along Line (km)')
         ax2.set_ylabel('Offset Distance (m)')
         ax2.set_title(f'GPS Points Distance from Line {line_id}')
@@ -276,14 +278,14 @@ def plot_distance_analysis(result_gdf, line_id):
     # Speed vs distance along line (if speed column exists)
     if 'speed_kmh' in result_gdf.columns:
         axes[1,0].scatter(result_gdf['distance_along_line_km'], 
-                         result_gdf['speed_kmh'], color="red", alpha=0.5, s=1)
+                          result_gdf['speed_kmh'], color="red", alpha=0.5, s=1)
         axes[1,0].set_xlabel('Distance Along Line (km)')
         axes[1,0].set_ylabel('Speed (km/h)')
         axes[1,0].set_title(f'Speed vs Distance Along Line {line_id}')
         axes[1,0].grid(True, alpha=0.3)
     else:
         axes[1,0].text(0.5, 0.5, 'Speed data not available', 
-                      ha='center', va='center', transform=axes[1,0].transAxes)
+                       ha='center', va='center', transform=axes[1,0].transAxes)
     
     # Time series if timestamp exists
     if 'timestamp' in result_gdf.columns:
@@ -293,18 +295,18 @@ def plot_distance_analysis(result_gdf, line_id):
                 result_gdf['timestamp'] = pd.to_datetime(result_gdf['timestamp'])
             
             axes[1,1].plot(result_gdf['timestamp'], result_gdf['distance_along_line_km'], 
-                          linewidth=0.5, color="red", alpha=0.7)
+                           linewidth=0.5, color="red", alpha=0.7)
             axes[1,1].set_xlabel('Time')
             axes[1,1].set_ylabel('Distance Along Line (km)')
             axes[1,1].set_title(f'Progress Along Line {line_id} Over Time')
             axes[1,1].tick_params(axis='x', rotation=45)
             axes[1,1].grid(True, alpha=0.3)
-        except:
+        except Exception:
             axes[1,1].text(0.5, 0.5, 'Timestamp parsing failed', 
-                          ha='center', va='center', transform=axes[1,1].transAxes)
+                           ha='center', va='center', transform=axes[1,1].transAxes)
     else:
         axes[1,1].text(0.5, 0.5, 'Timestamp data not available', 
-                      ha='center', va='center', transform=axes[1,1].transAxes)
+                       ha='center', va='center', transform=axes[1,1].transAxes)
     
     plt.tight_layout()
     plt.show()
@@ -379,6 +381,11 @@ def get_timetable_for_routes(route_ids, gtfs_dir="./data/gtfs"):
         on="stop_id",
         how="left"
     )
+    
+    # === FIX: Convert GTFS time strings to timedelta to handle hours > 23 ===
+    timetable['arrival_time'] = pd.to_timedelta(timetable['arrival_time'])
+    timetable['departure_time'] = pd.to_timedelta(timetable['departure_time'])
+    # =======================================================================
 
     # --- Sort by trip_id and stop_sequence ---
     timetable = timetable.sort_values(["trip_id", "stop_sequence"])
@@ -389,7 +396,7 @@ def get_timetable_for_routes(route_ids, gtfs_dir="./data/gtfs"):
     return timetable
 
 def create_scheduled_trips_from_gtfs(route_ids, gtfs_dir, lines_gdf, line_id,
-                                     utm_crs="EPSG:32736", plot=False, flip_origin=False):
+                                      utm_crs="EPSG:32736", plot=False, flip_origin=False):
     """
     Create a scheduled trips GeoDataFrame with distances along route for given route_id(s)
     and optionally plot reference line with stops and distance-time diagram.
@@ -404,6 +411,8 @@ def create_scheduled_trips_from_gtfs(route_ids, gtfs_dir, lines_gdf, line_id,
 
     # --- 1. Load GTFS timetable for given route_ids ---
     timetable_df = get_timetable_for_routes(route_ids, gtfs_dir=gtfs_dir)
+    if timetable_df.empty:
+        return gpd.GeoDataFrame(), None
 
     # --- 2. Load GTFS stops and convert to GeoDataFrame in UTM CRS ---
     stops_gdf = load_gtfs_stops(gtfs_dir, utm_crs=utm_crs)
@@ -429,7 +438,7 @@ def create_scheduled_trips_from_gtfs(route_ids, gtfs_dir, lines_gdf, line_id,
         ref_line = LineString(list(ref_line.coords)[::-1])
         print("🔄 Reference line origin has been flipped")
 
-        print(f"📏 Reference line length: {ref_line.length/1000:.2f} km")
+    print(f"📏 Reference line length: {ref_line.length/1000:.2f} km")
 
     # --- 4. Merge timetable with stops ---
     scheduled_df = pd.merge(
@@ -463,22 +472,31 @@ def create_scheduled_trips_from_gtfs(route_ids, gtfs_dir, lines_gdf, line_id,
         plt.show()
 
         # --- 6b. Plot distance along line vs scheduled time ---
-        scheduled_trips_gdf['arrival_time'] = pd.to_datetime(scheduled_trips_gdf['arrival_time'])
         scheduled_trips_gdf = scheduled_trips_gdf.sort_values('arrival_time')
+
+        # Create a plottable time-of-day axis, similar to Tab 4
+        dummy_date = pd.Timestamp("1900-01-01")
+        scheduled_trips_gdf["time_of_day"] = dummy_date + scheduled_trips_gdf["arrival_time"]
 
         plt.figure(figsize=(12,6))
         plt.plot(
-            scheduled_trips_gdf['arrival_time'],
+            scheduled_trips_gdf['time_of_day'], # Use the new time_of_day column
             scheduled_trips_gdf['distance_along_line_km'],
             marker='o',
-            linestyle='-',
+            linestyle='none',
             color='blue',
             alpha=0.7
         )
-        plt.xlabel("Scheduled Time")
+        
+        # Add the time formatter to show HH:MM
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+        plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
+        
+        plt.xlabel("Time of Day") # Update label
         plt.ylabel("Distance from Origin (km)")
         plt.title(f"Scheduled Stops Distance-Time Diagram for {line_id}")
         plt.grid(True, linestyle="--", alpha=0.5)
+        plt.xticks(rotation=45)
         plt.tight_layout()
         plt.show()
 
@@ -495,18 +513,25 @@ def plot_gps_vs_scheduled(gps_gdf, scheduled_trips_gdf,
     """
     Plot GPS trajectory and scheduled stops with time-of-day on x-axis.
     """
-    # Convert to datetime
+    # --- Prepare GPS Data ---
     gps_df = gps_gdf.copy()
     gps_df[gps_time_col] = pd.to_datetime(gps_df[gps_time_col])
+
+    # --- Prepare Schedule Data ---
     sched_df = scheduled_trips_gdf.copy()
-    sched_df[sched_time_col] = pd.to_datetime(sched_df[sched_time_col])
+    # The sched_time_col is already a timedelta from the get_timetable_for_routes function
 
-    # Replace date with a dummy date (same for all points)
+    # --- Create a common, plottable "time_of_day" axis ---
     dummy_date = pd.Timestamp("1900-01-01")
-    gps_df["time_of_day"] = gps_df[gps_time_col].apply(lambda t: dummy_date + pd.Timedelta(hours=t.hour, minutes=t.minute, seconds=t.second))
-    sched_df["time_of_day"] = sched_df[sched_time_col].apply(lambda t: dummy_date + pd.Timedelta(hours=t.hour, minutes=t.minute, seconds=t.second))
 
-    # Plot
+    # For GPS, get timedelta from start of its day and add to the dummy date
+    gps_time_delta = gps_df[gps_time_col] - gps_df[gps_time_col].dt.normalize()
+    gps_df["time_of_day"] = dummy_date + gps_time_delta
+
+    # For schedule, add the timedelta column directly to the dummy date
+    sched_df["time_of_day"] = dummy_date + sched_df[sched_time_col]
+
+    # --- Plot ---
     plt.figure(figsize=(14,6))
 
     # GPS points
@@ -518,7 +543,8 @@ def plot_gps_vs_scheduled(gps_gdf, scheduled_trips_gdf,
                 marker='o', color='blue', s=40, label="Scheduled Stops")
 
     # Format x-axis as HH:MM
-    plt.gca().xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%H:%M'))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+    plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2)) # Set major ticks every 2 hours
 
     plt.xlabel("Time of Day")
     plt.ylabel("Distance from Origin (km)")
