@@ -429,7 +429,7 @@ with tab3:
 
 # Tab 4: Comparative Analysis
 with tab4:
-    st.header("On-Demand Comparative Analysis")
+    st.header("Comparative Analysis")
     st.info("Select a line and its corresponding routes to generate a comparison plot directly.")
 
     col1, col2 = st.columns([3, 1])
