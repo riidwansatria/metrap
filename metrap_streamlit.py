@@ -285,7 +285,7 @@ with tab2:
     col1, col2 = st.columns(2)
     
     with col1:
-        flip_origin = st.checkbox("Flip Origin", value=False)
+        flip_origin = st.checkbox("Flip Origin", value=False, key="flip_origin_gps")
         analyze_button = st.button("Analyze GPS Data", type="primary")
     
     with col2:
@@ -321,19 +321,16 @@ with tab2:
                 
                 # Show matplotlib plots if generated
                 if show_plots:
-                    # Configure matplotlib to not show plots (prevents the warning)
-                    plt.ioff()  # Turn off interactive mode
-                    
+                    plt.ioff()
                     st.subheader("Distance Analysis Visualization")
                     st.pyplot(plt.gcf())
-                    plt.close()  # Close the figure properly
-                    
-                    # Generate additional detailed analysis plots immediately
+                    plt.close()
+
                     st.subheader("Detailed Analysis")
                     utils.plot_distance_analysis(gps_result_gdf, line_id=selected_line)
                     st.pyplot(plt.gcf())
-                    plt.close()  # Close the figure properly
-                
+                    plt.close()
+
                 # Display key metrics
                 if 'distance_along_line_km' in gps_result_gdf.columns:
                     st.subheader("Key Statistics")
@@ -348,14 +345,13 @@ with tab2:
                 
                 st.subheader("Analysis Results")
                 st.write(f"Processed {len(gps_result_gdf)} GPS points")
-                
-                if st.checkbox("Show processed GPS data"):
+
+                if st.checkbox("Show processed GPS data", key="preview_gps_processed"):
                     st.dataframe(gps_result_gdf.head(10))
                 
             except Exception as e:
                 st.error(f"Error during GPS analysis: {str(e)}")
-    
-    # Show previous results if available
+
     elif 'gps_result_gdf' in st.session_state:
         st.info("Previous GPS analysis results are available. Click 'Analyze GPS Data' to run a new analysis.")
 
@@ -392,7 +388,7 @@ with tab3:
     
     col3, col4 = st.columns(2)
     with col3:
-        flip_origin_sched = st.checkbox("Flip Origin (Schedule)", value=False)
+        flip_origin_sched = st.checkbox("Flip Origin (Schedule)", value=False, key="flip_origin_sched")
         show_plots_sched = st.checkbox("Show Schedule Plots", value=True)
     
     with col4:
@@ -410,21 +406,20 @@ with tab3:
                     
                     st.session_state.scheduled_trips_gdf = scheduled_trips_gdf
                     st.session_state.schedule_ref_line = ref_line
-                    st.session_state.selected_line_sched = selected_line_sched # Store selected line for comparison
-                    
+                    st.session_state.selected_line_sched = selected_line_sched
+
                     st.success(f"Schedule analysis completed for routes: {', '.join(route_ids)}")
-                    
-                    # Show matplotlib plots if generated
+
                     if show_plots_sched:
-                        plt.ioff()  # Turn off interactive mode
+                        plt.ioff()
                         st.subheader("Schedule Visualization")
                         st.pyplot(plt.gcf())
-                        plt.close()  # Close the figure properly
-                    
+                        plt.close()
+
                     st.subheader("Schedule Results")
                     st.write(f"Processed {len(scheduled_trips_gdf)} scheduled trips")
-                    
-                    if st.checkbox("Show schedule data preview"):
+
+                    if st.checkbox("Show schedule data preview", key="preview_sched"):
                         st.dataframe(scheduled_trips_gdf.head())
                         
                 except Exception as e:
@@ -432,78 +427,89 @@ with tab3:
 
 # Tab 4: Comparative Analysis
 with tab4:
-    st.header("Comparative Analysis")
-    
-    # Check if both analyses are completed
-    gps_available = 'gps_result_gdf' in st.session_state
-    schedule_available = 'scheduled_trips_gdf' in st.session_state
-    
-    if gps_available and schedule_available:
-        st.subheader("GPS vs Scheduled Operations")
-        
-        # Get data from session state
-        gps_df = st.session_state.gps_result_gdf
-        schedule_df = st.session_state.scheduled_trips_gdf
+    st.header("On-Demand Comparative Analysis")
+    st.info("Select a line and its corresponding routes to generate a comparison plot directly.")
 
-        # Get available lines and routes from the completed analyses
-        # The line selector will only have one option based on the current app flow,
-        # but is included as requested for future extensibility.
-        available_lines = [st.session_state.get('selected_line', 'N/A')]
-        available_routes = schedule_df['route_id'].unique().tolist() if 'route_id' in schedule_df.columns else []
+    # Get all available lines and sort them naturally
+    all_line_ids = lines_gdf['line_id'].unique().tolist()
+    all_line_ids = sorted(all_line_ids, key=lambda x: int(x[1:]))
 
-        col1, col2 = st.columns(2)
-        with col1:
-            # Direct selector for Line ID
-            selected_line_id = st.selectbox(
-                "Select Line ID to Compare",
-                options=available_lines,
-                index=0
-            )
-        with col2:
-            # Direct selector for Route IDs
-            selected_route_ids = st.multiselect(
-                "Select Route IDs to Compare",
-                options=available_routes,
-                default=available_routes
-            )
-        
-        if st.button("Generate Comparison Plot", type="primary"):
-            if not selected_route_ids:
-                st.warning("Please select at least one Route ID to generate the plot.")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        selected_line = st.selectbox("1. Select a Line", all_line_ids, index=4)
+    
+    selected_route_ids = []
+    if selected_line:
+        try:
+            # Use a cached function to prevent re-running this on every interaction
+            @st.cache_data
+            def get_routes_for_line_cached(line_id):
+                return utils.get_routes_for_line(line_id)
+
+            available_routes_df = get_routes_for_line_cached(selected_line)
+            route_options = available_routes_df['route_id'].tolist()
+
+            if not route_options:
+                st.warning(f"No routes found for Line **{selected_line}** in the GTFS data.")
             else:
-                with st.spinner("Creating comparison visualization..."):
-                    try:
-                        # Filter the schedule data based on user selection
-                        # The GPS data is already for the selected line
-                        filtered_schedule_df = schedule_df[schedule_df['route_id'].isin(selected_route_ids)]
+                with col1:
+                    selected_route_ids = st.multiselect(
+                        "2. Select Routes for this Line",
+                        options=route_options,
+                        default=route_options
+                    )
+        except Exception as e:
+            st.error(f"Could not fetch routes for Line {selected_line}: {e}")
 
-                        plt.ioff()  # Turn off interactive mode
+    with col2:
+        st.write("<br>", unsafe_allow_html=True) # Add space for alignment
+        flip_origin_checkbox = st.checkbox("Flip Origin", value=False, key="flip_origin_comparison")
+
+
+    st.divider()
+
+    if st.button("Generate Comparison Plot", type="primary", key="generate_comparison"):
+        if not selected_line or not selected_route_ids:
+            st.warning("Please select a line and at least one route to proceed.")
+        else:
+            with st.spinner(f"Running full analysis for Line **{selected_line}**..."):
+                try:
+                    # --- 1. Process GPS Data ---
+                    st.write("Step 1/3: Processing GPS data...")
+                    gps_result_gdf, _ = utils.calculate_line_distance(
+                        gps_gdf, lines_gdf, line_id=selected_line, plot=False,
+                        flip_origin=flip_origin_checkbox
+                    )
+
+                    # --- 2. Process Schedule Data ---
+                    st.write("Step 2/3: Processing schedule data...")
+                    scheduled_trips_gdf, _ = utils.create_scheduled_trips_from_gtfs(
+                        route_ids=selected_route_ids,
+                        gtfs_dir=GTFS_DIR_PATH,
+                        lines_gdf=lines_gdf,
+                        line_id=selected_line,
+                        plot=False,
+                        flip_origin=flip_origin_checkbox
+                    )
+
+                    # --- 3. Generate Plot ---
+                    st.write("Step 3/3: Generating comparison plot...")
+                    if gps_result_gdf.empty or scheduled_trips_gdf.empty:
+                        st.error("Analysis complete, but no overlapping data was found. The GPS traces may not cover the selected line, or no scheduled trips exist for the given routes.")
+                    else:
+                        plt.ioff()
                         utils.plot_gps_vs_scheduled(
-                            gps_df, 
-                            filtered_schedule_df,
-                            gps_time_col='timestamp',      # Use direct column name
-                            sched_time_col='arrival_time'  # Use direct column name
+                            gps_result_gdf,
+                            scheduled_trips_gdf,
+                            gps_time_col='timestamp',
+                            sched_time_col='arrival_time'
                         )
                         st.pyplot(plt.gcf())
-                        plt.close()  # Close the figure properly
-                    except Exception as e:
-                        st.error(f"Error creating comparison plot: {str(e)}")
-    else:
-        st.warning("Please complete both GPS Analysis and Schedule Analysis before running comparative analysis.")
-        
-        # Show status
-        st.subheader("Analysis Status")
-        col1, col2 = st.columns(2)
-        with col1:
-            if gps_available:
-                st.success("✅ GPS Analysis: Completed")
-            else:
-                st.error("❌ GPS Analysis: Not completed")
-        with col2:
-            if schedule_available:
-                st.success("✅ Schedule Analysis: Completed")
-            else:
-                st.error("❌ Schedule Analysis: Not completed")
+                        plt.close()
+                        st.success(f"Successfully generated comparison for Line **{selected_line}**.")
+
+                except Exception as e:
+                    st.error(f"An error occurred during analysis: {e}")
 
 # Footer
 st.divider()
