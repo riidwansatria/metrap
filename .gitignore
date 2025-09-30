@@ -5,3 +5,4 @@ __pycache__/
 venv/
 
 outputs/
+data/zg11_20250915.csv

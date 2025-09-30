@@ -40,7 +40,7 @@ uploaded_gps = st.sidebar.file_uploader(
 # Fixed paths for codebase data
 LINES_FILE_PATH = "./data/lines_gdf.gpkg"
 GTFS_DIR_PATH = "./data/gtfs"
-SAMPLE_GPS_PATH = "./data/zg11_20250915.csv"
+SAMPLE_GPS_PATH = "./data/sample_data.csv"
 
 @st.cache_data
 def load_lines_data(lines_path):
