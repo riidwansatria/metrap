@@ -139,22 +139,76 @@ if 'data_loaded' in st.session_state and st.session_state.data_loaded:
 if not data_loaded:
     st.info("Please upload your GPS CSV file or load sample data to get started.")
 
-    st.subheader("Expected GPS CSV Format")
+    # GPS Data Format Section
+    st.subheader("📍 Required: GPS CSV Data")
     st.markdown("""
-    Your GPS CSV file should contain the following columns:
-    - **timestamp**: Date and time of GPS reading
-    - **lat**: Latitude coordinate
-    - **lon**: Longitude coordinate
-    - **speed_kmh**: Speed in kilometers per hour (optional)
-    - **direction**: Direction/heading (optional)
-
-    Example:
-    ```
-    timestamp,lat,lon,speed_kmh,direction
-    2025-09-15 08:00:00,-25.9653,32.5832,45.2,180
-    2025-09-15 08:01:00,-25.9663,32.5842,42.1,185
-    ```
+    Your GPS CSV file should be downloaded from the **Zenmov FMS (Fleet Management System)** website.
+    
+    **Expected format:**
     """)
+    
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        st.markdown("""
+        | Column | English | Description |
+        |--------|---------|-------------|
+        | 時刻 | Time | Timestamp of GPS reading |
+        | 緯度 | Latitude | Geographic latitude coordinate |
+        | 経度 | Longitude | Geographic longitude coordinate |
+        | 速度 | Speed | Vehicle speed in km/h |
+        | 方向 | Direction | Heading direction (0-360 degrees) |
+        """)
+    
+    with col2:
+        st.code("""時刻, 緯度, 経度, 速度(km/h), 方向
+2025-09-15 08:00:00,-25.9653,32.5832,45.2,180
+2025-09-15 08:01:00,-25.9663,32.5842,42.1,185
+2025-09-15 08:02:00,-25.9673,32.5852,43.8,182""", language="csv")
+
+    st.divider()
+
+    # GTFS Data Section
+    st.subheader("📅 Pre-loaded: GTFS Schedule Data")
+    st.markdown("""
+    This application comes with **GTFS (General Transit Feed Specification)** data already included. 
+    You don't need to provide this data.
+    
+    **GTFS data includes:**
+    """)
+    
+    gtfs_col1, gtfs_col2 = st.columns([1, 1])
+    
+    with gtfs_col1:
+        st.markdown("""
+        - **📋 routes.txt** - Bus line definitions and details
+        - **📍 stops.txt** - Stop locations, names, and IDs
+        - **⏱️ stop_times.txt** - Scheduled arrival/departure times
+        """)
+    
+    with gtfs_col2:
+        st.markdown("""
+        - **🚌 trips.txt** - Individual service instances
+        - **📆 calendar.txt** - Service day schedules
+        - **🗺️ shapes.txt** - Geographic route paths
+        """)
+    
+    st.info("💡 **What is GTFS?** GTFS is a standardized format for public transportation schedules and geographic information. It allows this tool to compare your actual GPS data against the planned schedules.")
+
+    st.divider()
+
+    # How it Works Section
+    st.subheader("🔄 How the Analysis Works")
+    st.markdown("""
+    1. **You provide:** Real-time GPS tracking data (CSV file)
+    2. **Application uses:** Pre-loaded GTFS schedule data and route shapes
+    3. **Result:** Comparison showing how actual bus operations match against planned schedules
+    
+    This helps identify:
+    - ⏰ Schedule adherence (delays/early arrivals)
+    - 🗺️ Route deviation
+    """)
+
     st.stop()
 
 # Main tabs
