@@ -156,8 +156,8 @@ if not data_loaded:
         | 時刻 | Time | Timestamp of GPS reading |
         | 緯度 | Latitude | Geographic latitude coordinate |
         | 経度 | Longitude | Geographic longitude coordinate |
-        | 速度 | Speed | Vehicle speed in km/h |
-        | 方向 | Direction | Heading direction (0-360 degrees) |
+        | 速度 | Speed | [Optional] Vehicle speed in km/h |
+        | 方向 | Direction | [Optional] Heading direction (0-360 degrees) |
         """)
     
     with col2:
