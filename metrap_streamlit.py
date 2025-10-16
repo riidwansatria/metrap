@@ -563,11 +563,6 @@ st.markdown("**METRAP Bus Operations Analysis** - Built with Streamlit")
 st.sidebar.divider()
 st.sidebar.subheader("Utilities")
 
-if st.sidebar.button("Create Outputs Directory"):
-    import os
-    os.makedirs("./outputs", exist_ok=True)
-    st.sidebar.success("Outputs directory created!")
-
 if st.sidebar.button("Clear Session Data"):
     for key in list(st.session_state.keys()):
         if key.startswith(('gps_', 'scheduled_', 'lines_', 'data_loaded', 'available_routes', 'ref_line', 'selected_')):
