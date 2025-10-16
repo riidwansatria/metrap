@@ -9,7 +9,7 @@ from contextlib import redirect_stdout
 
 # Import utils module
 try:
-    import utils
+    import metrap_utils
 except ImportError:
     st.error("Utils module not found. Please ensure utils.py is in the same directory or in Python path.")
     st.stop()
@@ -46,7 +46,7 @@ SAMPLE_GPS_PATH = "./data/sample_data.csv"
 def load_lines_data(lines_path):
     """Load lines data from codebase"""
     try:
-        return utils.load_data(lines_path)
+        return metrap_utils.load_data(lines_path)
     except Exception as e:
         st.error(f"Error loading lines data: {str(e)}")
         return None
@@ -56,10 +56,10 @@ def process_gps_data(gps_file=None):
     try:
         if gps_file is not None:
             # Process uploaded file by passing the file object
-            return utils.load_gps_from_csv(gps_file)
+            return metrap_utils.load_gps_from_csv(gps_file)
         else:
             # Use sample data by passing the file path
-            return utils.load_gps_from_csv(SAMPLE_GPS_PATH)
+            return metrap_utils.load_gps_from_csv(SAMPLE_GPS_PATH)
     except Exception as e:
         st.error(f"Error processing GPS data: {str(e)}")
         return None
@@ -144,20 +144,20 @@ if not data_loaded:
     st.markdown("""
     Your GPS CSV file should be downloaded from the **Zenmov FMS (Fleet Management System)** website.
     
-    **Expected format:**
+    **Expected format (The column name works in both Japanese and English):**
     """)
     
     col1, col2 = st.columns([1, 1])
     
     with col1:
         st.markdown("""
-        | Column | English | Description |
+        | Column | Column (EN) | Description |
         |--------|---------|-------------|
-        | 時刻 | Time | Timestamp of GPS reading |
-        | 緯度 | Latitude | Geographic latitude coordinate |
-        | 経度 | Longitude | Geographic longitude coordinate |
-        | 速度 | Speed | [Optional] Vehicle speed in km/h |
-        | 方向 | Direction | [Optional] Heading direction (0-360 degrees) |
+        | 時刻 | timestamp | Timestamp of GPS reading |
+        | 緯度 | lat | Geographic latitude coordinate |
+        | 経度 | lon | Geographic longitude coordinate |
+        | 速度 | speed_kmh | [Optional] Vehicle speed in km/h |
+        | 方向 | direction | [Optional] Heading direction (0-360 degrees) |
         """)
     
     with col2:
@@ -223,7 +223,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 @st.cache_data
 def get_routes_for_line_cached(line_id):
     """Cached function to fetch routes for a given line ID."""
-    return utils.get_routes_for_line(line_id)
+    return metrap_utils.get_routes_for_line(line_id)
 
 # Get all available lines and sort them naturally
 all_line_ids = lines_gdf['line_id'].unique().tolist()
@@ -359,7 +359,7 @@ with tab2:
                 # Capture print output from utils function
                 f = io.StringIO()
                 with redirect_stdout(f):
-                    gps_result_gdf, ref_line = utils.calculate_line_distance(
+                    gps_result_gdf, ref_line = metrap_utils.calculate_line_distance(
                         gps_gdf, lines_gdf, line_id=selected_line,
                         plot=show_plots, flip_origin=flip_origin
                     )
@@ -384,7 +384,7 @@ with tab2:
                     plt.close()
 
                     st.subheader("Detailed Analysis")
-                    utils.plot_distance_analysis(gps_result_gdf, line_id=selected_line)
+                    metrap_utils.plot_distance_analysis(gps_result_gdf, line_id=selected_line)
                     st.pyplot(plt.gcf())
                     plt.close()
 
@@ -450,7 +450,7 @@ with tab3:
         else:
             with st.spinner("Processing schedule data..."):
                 try:
-                    scheduled_trips_gdf, ref_line = utils.create_scheduled_trips_from_gtfs(
+                    scheduled_trips_gdf, ref_line = metrap_utils.create_scheduled_trips_from_gtfs(
                         route_ids=selected_route_ids_sched,
                         gtfs_dir=GTFS_DIR_PATH,
                         lines_gdf=lines_gdf,
@@ -522,13 +522,13 @@ with tab4:
             with st.spinner(f"Running full analysis for Line **{selected_line}**..."):
                 try:
                     st.write("Step 1/3: Processing GPS data...")
-                    gps_result_gdf, _ = utils.calculate_line_distance(
+                    gps_result_gdf, _ = metrap_utils.calculate_line_distance(
                         gps_gdf, lines_gdf, line_id=selected_line, plot=False,
                         flip_origin=flip_origin_checkbox
                     )
 
                     st.write("Step 2/3: Processing schedule data...")
-                    scheduled_trips_gdf, _ = utils.create_scheduled_trips_from_gtfs(
+                    scheduled_trips_gdf, _ = metrap_utils.create_scheduled_trips_from_gtfs(
                         route_ids=selected_route_ids,
                         gtfs_dir=GTFS_DIR_PATH,
                         lines_gdf=lines_gdf,
@@ -542,7 +542,7 @@ with tab4:
                         st.error("Analysis complete, but no overlapping data was found. The GPS traces may not cover the selected line, or no scheduled trips exist for the given routes.")
                     else:
                         plt.ioff()
-                        utils.plot_gps_vs_scheduled(
+                        metrap_utils.plot_gps_vs_scheduled(
                             gps_result_gdf,
                             scheduled_trips_gdf,
                             gps_time_col='timestamp',
